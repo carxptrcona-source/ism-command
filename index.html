@@ -1,421 +1,638 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ISM Command Center v4.0 — Inglés Sin Miedo</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-base: #0f1117;
-            --bg-sidebar: #161920;
-            --bg-panel: #1a1d27;
-            --bg-card: #222632;
-            --bg-card-hover: #2a2f3e;
-            --bg-input: #1e2230;
-            --text-primary: #f0f4f8;
-            --text-secondary: #8899b0;
-            --text-tertiary: #5a6a80;
-            --accent: #3b82f6;
-            --accent-hover: #2563eb;
-            --accent-glow: rgba(59,130,246,0.15);
-            --accent-glow-strong: rgba(59,130,246,0.3);
-            --border: #2a2f3e;
-            --border-hover: #3a4050;
-            --green: #22c55e;
-            --green-bg: rgba(34,197,94,0.1);
-            --yellow: #eab308;
-            --yellow-bg: rgba(234,179,8,0.1);
-            --red: #ef4444;
-            --red-bg: rgba(239,68,68,0.1);
-            --purple: #a855f7;
-            --purple-bg: rgba(168,85,247,0.1);
-            --cyan: #06b6d4;
-            --cyan-bg: rgba(6,182,212,0.1);
-            --orange: #f97316;
-            --orange-bg: rgba(249,115,22,0.1);
-            --sidebar-w: 280px;
-            --radius: 10px;
-            --radius-sm: 6px;
-            --radius-lg: 14px;
-            --shadow: 0 4px 20px rgba(0,0,0,0.25);
-            --shadow-lg: 0 8px 40px rgba(0,0,0,0.4);
-            --transition: all 0.2s ease;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ISM Command Center v4.0 — Inglés Sin Miedo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-base: #0f1117; --bg-sidebar: #161920; --bg-panel: #1a1d27;
+  --bg-card: #222632; --bg-card-hover: #2a2f3e; --bg-input: #1e2230;
+  --text-primary: #f0f4f8; --text-secondary: #8899b0; --text-tertiary: #5a6a80;
+  --accent: #3b82f6; --accent-hover: #2563eb;
+  --accent-glow: rgba(59,130,246,0.15); --accent-glow-strong: rgba(59,130,246,0.3);
+  --border: #2a2f3e; --border-hover: #3a4050;
+  --green: #22c55e; --green-bg: rgba(34,197,94,0.1);
+  --yellow: #eab308; --yellow-bg: rgba(234,179,8,0.1);
+  --red: #ef4444; --red-bg: rgba(239,68,68,0.1);
+  --purple: #a855f7; --purple-bg: rgba(168,85,247,0.1);
+  --cyan: #06b6d4; --cyan-bg: rgba(6,182,212,0.1);
+  --orange: #f97316; --orange-bg: rgba(249,115,22,0.1);
+  --sidebar-w: 280px; --radius: 10px; --radius-sm: 6px; --radius-lg: 14px;
+  --shadow: 0 4px 20px rgba(0,0,0,0.25); --shadow-lg: 0 8px 40px rgba(0,0,0,0.4);
+  --transition: all 0.2s ease;
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 14px; }
+body { font-family: 'Inter', sans-serif; background: var(--bg-base); color: var(--text-primary); display: flex; height: 100vh; overflow: hidden; line-height: 1.6; }
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-tertiary); }
+a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
 
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-        html { font-size: 14px; }
-        body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background: var(--bg-base);
-            color: var(--text-primary);
-            display: flex;
-            height: 100vh;
-            overflow: hidden;
-            line-height: 1.6;
-        }
-        ::-webkit-scrollbar { width: 8px; height: 8px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--text-tertiary); }
-        a { color: var(--accent); text-decoration: none; }
-        a:hover { text-decoration: underline; }
+/* SIDEBAR */
+.sidebar { width: var(--sidebar-w); min-width: var(--sidebar-w); background: var(--bg-sidebar); border-right: 1px solid var(--border); display: flex; flex-direction: column; z-index: 50; transition: transform 0.3s ease; }
+.sidebar-brand { padding: 24px 20px; border-bottom: 1px solid var(--border); text-align: center; }
+.sidebar-brand h1 { font-size: 1rem; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; }
+.sidebar-brand p { font-size: 0.7rem; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+.sidebar-nav { flex: 1; padding: 16px 10px; display: flex; flex-direction: column; gap: 3px; overflow-y: auto; }
+.nav-label { font-size: 0.6rem; font-weight: 800; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 1.5px; padding: 14px 14px 6px; }
+.nav-btn { background: none; border: none; color: var(--text-secondary); padding: 9px 14px; border-radius: var(--radius-sm); cursor: pointer; font-size: 0.85rem; font-weight: 500; text-align: left; display: flex; align-items: center; gap: 10px; transition: var(--transition); position: relative; }
+.nav-btn:hover { background: var(--bg-card); color: var(--text-primary); }
+.nav-btn.active { background: var(--accent-glow); color: var(--accent); font-weight: 600; }
+.nav-btn.active::before { content: ''; position: absolute; left: 0; top: 4px; bottom: 4px; width: 3px; background: var(--accent); border-radius: 0 3px 3px 0; }
+.nav-btn .badge-count { margin-left: auto; background: var(--bg-card); color: var(--text-tertiary); font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 10px; border: 1px solid var(--border); }
+.sidebar-footer { padding: 16px 20px; border-top: 1px solid var(--border); font-size: 0.72rem; color: var(--text-tertiary); text-align: center; }
+.menu-toggle { display: none; position: fixed; top: 12px; left: 12px; z-index: 100; background: var(--bg-panel); border: 1px solid var(--border); color: var(--text-primary); width: 40px; height: 40px; border-radius: var(--radius-sm); cursor: pointer; font-size: 1.2rem; align-items: center; justify-content: center; }
 
-        /* SIDEBAR */
-        .sidebar {
-            width: var(--sidebar-w);
-            min-width: var(--sidebar-w);
-            background: var(--bg-sidebar);
-            border-right: 1px solid var(--border);
-            display: flex;
-            flex-direction: column;
-            z-index: 50;
-            transition: transform 0.3s ease;
-        }
-        .sidebar-brand {
-            padding: 24px 20px;
-            border-bottom: 1px solid var(--border);
-            text-align: center;
-        }
-        .sidebar-brand h1 { font-size: 1rem; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; }
-        .sidebar-brand p { font-size: 0.7rem; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-top: 4px; }
-        .sidebar-nav {
-            flex: 1;
-            padding: 16px 10px;
-            display: flex;
-            flex-direction: column;
-            gap: 3px;
-            overflow-y: auto;
-        }
-        .nav-label {
-            font-size: 0.6rem;
-            font-weight: 800;
-            color: var(--text-tertiary);
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            padding: 14px 14px 6px;
-        }
-        .nav-btn {
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            padding: 9px 14px;
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            font-size: 0.85rem;
-            font-weight: 500;
-            text-align: left;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: var(--transition);
-            position: relative;
-        }
-        .nav-btn:hover { background: var(--bg-card); color: var(--text-primary); }
-        .nav-btn.active { background: var(--accent-glow); color: var(--accent); font-weight: 600; }
-        .nav-btn.active::before {
-            content: '';
-            position: absolute;
-            left: 0; top: 4px; bottom: 4px;
-            width: 3px;
-            background: var(--accent);
-            border-radius: 0 3px 3px 0;
-        }
-        .nav-btn .badge-count {
-            margin-left: auto;
-            background: var(--bg-card);
-            color: var(--text-tertiary);
-            font-size: 0.7rem;
-            font-weight: 700;
-            padding: 2px 8px;
-            border-radius: 10px;
-            border: 1px solid var(--border);
-        }
-        .sidebar-footer {
-            padding: 16px 20px;
-            border-top: 1px solid var(--border);
-            font-size: 0.72rem;
-            color: var(--text-tertiary);
-            text-align: center;
-        }
+/* MAIN CONTENT */
+.main-content { flex: 1; overflow-y: auto; overflow-x: hidden; padding: 32px 40px; position: relative; }
+.view { display: none; animation: viewEnter 0.35s ease forwards; }
+.view.active { display: block; }
+@keyframes viewEnter { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.page-header { margin-bottom: 28px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+.page-header h2 { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.3px; }
+.page-header p { color: var(--text-secondary); margin-top: 6px; font-size: 0.9rem; }
 
-        .menu-toggle {
-            display: none;
-            position: fixed;
-            top: 12px; left: 12px;
-            z-index: 100;
-            background: var(--bg-panel);
-            border: 1px solid var(--border);
-            color: var(--text-primary);
-            width: 40px; height: 40px;
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            font-size: 1.2rem;
-            align-items: center;
-            justify-content: center;
-        }
+/* COMPONENTS */
+.stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 28px; }
+.stat-card { background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; transition: var(--transition); }
+.stat-card:hover { border-color: var(--border-hover); transform: translateY(-2px); box-shadow: var(--shadow); }
+.stat-card .label { font-size: 0.72rem; font-weight: 700; color: var(--text-tertiary); text-transform: uppercase; }
+.stat-card .number { font-size: 1.8rem; font-weight: 900; margin-top: 6px; line-height: 1; }
+.stat-card .sub { font-size: 0.72rem; color: var(--text-tertiary); margin-top: 6px; }
 
-        /* MAIN */
-        .main-content {
-            flex: 1;
-            overflow-y: auto;
-            overflow-x: hidden;
-            padding: 32px 40px;
-            position: relative;
-        }
-        .view { display: none; animation: viewEnter 0.35s ease forwards; }
-        .view.active { display: block; }
-        @keyframes viewEnter {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+.progress-container { background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin-bottom: 28px; }
+.progress-container .progress-header { display: flex; justify-content: space-between; margin-bottom: 12px; font-weight: 700; }
+.progress-bar-bg { height: 10px; background: var(--bg-card); border-radius: 5px; }
+.progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--green)); border-radius: 5px; transition: width 0.5s ease; }
 
-        .page-header { margin-bottom: 28px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
-        .page-header h2 { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.3px; }
-        .page-header p { color: var(--text-secondary); margin-top: 6px; font-size: 0.9rem; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.info-box { background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; display: flex; gap: 14px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 18px; font-size: 0.85rem; font-weight: 600; border-radius: var(--radius-sm); border: none; cursor: pointer; transition: var(--transition); color: white; }
+.btn-primary { background: var(--accent); } .btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); }
+.btn-secondary { background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border); } .btn-secondary:hover { border-color: var(--border-hover); }
+.btn-danger { background: var(--red); } .btn-sm { padding: 6px 12px; font-size: 0.78rem; }
+.btn-ai { background: linear-gradient(135deg, #8b5cf6, #3b82f6); box-shadow: 0 2px 8px rgba(139,92,246,0.3); }
+.form-group { margin-bottom: 20px; } .form-group label { display: block; font-size: 0.78rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 8px; }
+.form-input, .form-select, .form-textarea { width: 100%; background: var(--bg-input); border: 1px solid var(--border); color: var(--text-primary); padding: 12px; border-radius: var(--radius-sm); font-family: inherit; }
+.form-input:focus, .form-select:focus, .form-textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
 
-        /* STATS */
-        .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 28px; }
-        .stat-card {
-            background: var(--bg-panel);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 18px;
-            transition: var(--transition);
-        }
-        .stat-card:hover { border-color: var(--border-hover); transform: translateY(-2px); box-shadow: var(--shadow); }
-        .stat-card .label { font-size: 0.72rem; font-weight: 700; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.5px; }
-        .stat-card .number { font-size: 1.8rem; font-weight: 900; margin-top: 6px; line-height: 1; }
-        .stat-card .sub { font-size: 0.72rem; color: var(--text-tertiary); margin-top: 6px; }
+/* TABLE & KANBAN */
+.table-wrapper { background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius); overflow: auto; max-height: 65vh; }
+table { width: 100%; border-collapse: collapse; } th, td { padding: 14px 18px; border-bottom: 1px solid var(--border); text-align: left; }
+th { position: sticky; top: 0; background: var(--bg-card); font-size: 0.7rem; font-weight: 800; color: var(--text-tertiary); text-transform: uppercase; z-index: 2; }
+tbody tr:hover { background: rgba(255,255,255,0.02); cursor: pointer; }
+.badge { padding: 4px 10px; border-radius: 4px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; }
+.badge-idea { background: rgba(100,116,139,0.15); color: #94a3b8; } .badge-audio { background: var(--purple-bg); color: #c4b5fd; }
+.badge-edit { background: var(--yellow-bg); color: #fcd34d; } .badge-ready { background: var(--green-bg); color: #86efac; } .badge-pub { background: var(--cyan-bg); color: #67e8f9; }
 
-        /* PROGRESS */
-        .progress-container { background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin-bottom: 28px; }
-        .progress-container .progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-        .progress-container .progress-header h3 { font-size: 0.9rem; font-weight: 700; }
-        .progress-container .progress-header span { font-size: 0.85rem; color: var(--accent); font-weight: 700; }
-        .progress-bar-bg { height: 10px; background: var(--bg-card); border-radius: 5px; overflow: hidden; }
-        .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--green)); border-radius: 5px; transition: width 0.5s ease; }
+.kanban-board { display: flex; gap: 16px; height: calc(100vh - 180px); overflow-x: auto; padding-bottom: 10px; }
+.kanban-col { flex: 0 0 280px; background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius); display: flex; flex-direction: column; }
+.kanban-col-header { padding: 14px 16px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; font-weight: 700; background: rgba(0,0,0,0.15); }
+.kanban-col-body { padding: 12px; flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+.kanban-card { background: var(--bg-card); border: 1px solid var(--border); padding: 14px; border-radius: var(--radius-sm); cursor: grab; transition: var(--transition); }
+.kanban-card:hover { border-color: var(--accent); transform: translateY(-2px); } .kanban-card-title { font-weight: 700; font-size: 0.9rem; margin-bottom: 6px; }
+.kanban-card-phrase { font-size: 0.78rem; color: var(--text-secondary); font-style: italic; }
 
-        /* INFO BOX */
-        .info-box {
-            background: var(--bg-panel);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 20px 24px;
-            margin-bottom: 28px;
-            display: flex;
-            gap: 14px;
-            align-items: flex-start;
-        }
-        .info-box .icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 2px; }
-        .info-box .text h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; }
-        .info-box .text p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; }
+/* CALENDAR & AI & TIMER */
+.calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+.calendar-day { background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius-sm); min-height: 80px; padding: 8px; }
+.cal-item { font-size: 0.7rem; background: var(--accent-glow); color: var(--accent); padding: 3px 6px; border-radius: 3px; margin-bottom: 3px; cursor: pointer; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-        /* BUTTONS */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 10px 18px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            border-radius: var(--radius-sm);
-            border: none;
-            cursor: pointer;
-            transition: var(--transition);
-            font-family: inherit;
-        }
-        .btn-primary { background: var(--accent); color: white; box-shadow: 0 2px 8px rgba(59,130,246,0.3); }
-        .btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); }
-        .btn-secondary { background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border); }
-        .btn-secondary:hover { background: var(--bg-card-hover); border-color: var(--border-hover); }
-        .btn-danger { background: var(--red); color: white; }
-        .btn-danger:hover { background: #dc2626; }
-        .btn-ghost { background: none; color: var(--text-secondary); border: 1px solid var(--border); }
-        .btn-ghost:hover { background: var(--bg-card); color: var(--text-primary); }
-        .btn-sm { padding: 6px 12px; font-size: 0.78rem; }
-        .btn-ai { background: linear-gradient(135deg, #8b5cf6, #3b82f6); color: white; box-shadow: 0 2px 8px rgba(139,92,246,0.3); }
-        .btn-ai:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(139,92,246,0.4); }
+.ai-panel { background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; margin-bottom: 24px; }
+.ai-result { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px; margin-top: 16px; white-space: pre-wrap; max-height: 400px; overflow-y: auto; color: var(--text-secondary); }
 
-        /* FORMS */
-        .form-group { margin-bottom: 20px; }
-        .form-group label {
-            display: block;
-            font-size: 0.78rem;
-            font-weight: 700;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 8px;
-        }
-        .form-input, .form-select, .form-textarea {
-            width: 100%;
-            background: var(--bg-input);
-            border: 1px solid var(--border);
-            color: var(--text-primary);
-            padding: 12px 14px;
-            border-radius: var(--radius-sm);
-            font-size: 0.9rem;
-            font-family: inherit;
-            transition: var(--transition);
-        }
-        .form-input:focus, .form-select:focus, .form-textarea:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px var(--accent-glow);
-        }
-        .form-textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
-        .form-code { font-family: 'Courier New', monospace; font-size: 0.82rem; color: #93c5fd; background: #0c0f18; border-color: #1e2940; line-height: 1.7; }
-        .form-inline { display: flex; gap: 12px; align-items: flex-end; }
-        .form-inline .form-group { flex: 1; margin-bottom: 0; }
+.timer-display { font-size: 4rem; font-weight: 900; font-family: 'Courier New', monospace; color: var(--accent); margin: 20px 0; text-align: center; }
+.timer-running { color: var(--green); animation: timerPulse 1s ease infinite; }
+@keyframes timerPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
 
-        /* TABLE */
-        .table-controls { display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
-        .search-input {
-            flex: 1; min-width: 200px;
-            background: var(--bg-input);
-            border: 1px solid var(--border);
-            color: var(--text-primary);
-            padding: 10px 14px 10px 36px;
-            border-radius: var(--radius-sm);
-            font-size: 0.85rem;
-            font-family: inherit;
-            transition: var(--transition);
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%235a6a80' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: 12px center;
-        }
-        .search-input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
-        .filter-select {
-            background: var(--bg-input);
-            border: 1px solid var(--border);
-            color: var(--text-secondary);
-            padding: 10px 14px;
-            border-radius: var(--radius-sm);
-            font-size: 0.85rem;
-            font-family: inherit;
-            cursor: pointer;
-        }
-        .table-wrapper { background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius); overflow: auto; max-height: 65vh; }
-        table { width: 100%; border-collapse: collapse; }
-        thead { position: sticky; top: 0; background: var(--bg-card); z-index: 2; }
-        th { padding: 14px 18px; font-size: 0.7rem; font-weight: 800; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.8px; border-bottom: 1px solid var(--border); text-align: left; white-space: nowrap; }
-        td { padding: 14px 18px; border-bottom: 1px solid var(--border); font-size: 0.88rem; }
-        tbody tr { transition: background-color 0.15s; cursor: pointer; }
-        tbody tr:hover { background: rgba(255,255,255,0.02); }
+/* MODAL */
+.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 200; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
+.modal-overlay.open { display: flex; }
+.modal { background: var(--bg-panel); width: 95%; max-width: 800px; max-height: 90vh; border-radius: var(--radius-lg); overflow-y: auto; border: 1px solid var(--border-hover); }
+.modal-head { padding: 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; position: sticky; top: 0; background: var(--bg-panel); z-index: 3; }
+.modal-body { padding: 28px; }
 
-        .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 4px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
-        .badge-idea { background: rgba(100,116,139,0.15); color: #94a3b8; border: 1px solid rgba(100,116,139,0.2); }
-        .badge-audio { background: var(--purple-bg); color: #c4b5fd; border: 1px solid rgba(168,85,247,0.2); }
-        .badge-edit { background: var(--yellow-bg); color: #fcd34d; border: 1px solid rgba(234,179,8,0.2); }
-        .badge-ready { background: var(--green-bg); color: #86efac; border: 1px solid rgba(34,197,94,0.2); }
-        .badge-pub { background: var(--cyan-bg); color: #67e8f9; border: 1px solid rgba(6,182,212,0.2); }
+#toast-container { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 9999; }
+.toast { background: var(--bg-panel); color: white; padding: 14px 20px; border-radius: var(--radius-sm); border-left: 4px solid var(--green); }
+.toast.error { border-left-color: var(--red); }
 
-        /* KANBAN */
-        .kanban-board { display: flex; gap: 16px; height: calc(100vh - 180px); overflow-x: auto; padding-bottom: 10px; }
-        .kanban-col { flex: 0 0 270px; background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius); display: flex; flex-direction: column; overflow: hidden; }
-        .kanban-col-header { padding: 14px 16px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; font-weight: 700; background: rgba(0,0,0,0.15); flex-shrink: 0; }
-        .kanban-col-header .col-count { background: var(--bg-card); padding: 2px 8px; border-radius: 10px; font-size: 0.7rem; color: var(--text-tertiary); font-weight: 700; border: 1px solid var(--border); }
-        .kanban-col-body { padding: 12px; flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; transition: background-color 0.2s; }
-        .kanban-card { background: var(--bg-card); border: 1px solid var(--border); padding: 14px; border-radius: var(--radius-sm); cursor: grab; transition: var(--transition); position: relative; }
-        .kanban-card:hover { border-color: var(--border-hover); transform: translateY(-2px); box-shadow: var(--shadow); }
-        .kanban-card.dragging { opacity: 0.4; border: 2px dashed var(--accent); }
-        .kanban-col-body.drag-over { background: var(--accent-glow); }
-        .kanban-card-title { font-weight: 700; font-size: 0.9rem; margin-bottom: 6px; }
-        .kanban-card-phrase { font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 8px; font-style: italic; }
-        .kanban-card-meta { font-size: 0.7rem; color: var(--text-tertiary); display: flex; justify-content: space-between; padding-top: 8px; border-top: 1px solid var(--border); }
-
-        /* MODAL */
-        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75); z-index: 200; justify-content: center; align-items: center; backdrop-filter: blur(4px); opacity: 0; transition: opacity 0.25s; }
-        .modal-overlay.open { display: flex; opacity: 1; }
-        .modal { background: var(--bg-panel); width: 95%; max-width: 920px; max-height: 90vh; border-radius: var(--radius-lg); border: 1px solid var(--border-hover); overflow-y: auto; box-shadow: var(--shadow-lg); transform: scale(0.96); transition: transform 0.3s cubic-bezier(0.16,1,0.3,1); }
-        .modal-overlay.open .modal { transform: scale(1); }
-        .modal-head { padding: 20px 28px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: var(--bg-panel); z-index: 3; }
-        .modal-head h3 { font-size: 1.2rem; font-weight: 800; }
-        .modal-close { width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--text-secondary); font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: var(--transition); }
-        .modal-close:hover { background: var(--red-bg); color: var(--red); border-color: var(--red); transform: rotate(90deg); }
-        .modal-body { padding: 28px; }
-        .modal-section { margin-bottom: 28px; }
-        .modal-section-title { font-size: 0.95rem; font-weight: 700; color: var(--accent); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
-        .phrase-row { display: grid; grid-template-columns: 1fr 1fr 1.2fr; gap: 12px; background: var(--bg-card); padding: 14px 16px; border-radius: var(--radius-sm); border: 1px solid var(--border); margin-bottom: 10px; transition: border-color 0.2s; }
-        .phrase-row:hover { border-color: var(--border-hover); }
-        .phrase-row .col-label { font-size: 0.65rem; font-weight: 800; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
-        .phrase-row .col-value { font-size: 0.95rem; }
-        .phrase-row .col-value.eng { color: var(--accent); font-weight: 700; }
-        .phrase-row .col-value.fon { font-family: 'Courier New', monospace; color: var(--text-secondary); font-size: 0.88rem; }
-        .phrase-edit-input { width: 100%; background: var(--bg-input); border: 1px solid var(--border); color: var(--text-primary); padding: 8px 10px; border-radius: 4px; font-size: 0.88rem; font-family: inherit; }
-        .phrase-edit-input:focus { outline: none; border-color: var(--accent); }
-        .phrase-edit-input.fon-input { font-family: 'Courier New', monospace; }
-        .modal-footer { padding: 16px 28px; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; gap: 10px; position: sticky; bottom: 0; background: var(--bg-panel); }
-
-        /* CALENDAR */
-        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin-bottom: 28px; }
-        .calendar-day-header { text-align: center; font-size: 0.7rem; font-weight: 800; color: var(--text-tertiary); text-transform: uppercase; padding: 8px; }
-        .calendar-day { background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius-sm); min-height: 80px; padding: 8px; transition: var(--transition); }
-        .calendar-day:hover { border-color: var(--border-hover); }
-        .calendar-day .day-num { font-size: 0.75rem; font-weight: 700; color: var(--text-tertiary); margin-bottom: 4px; }
-        .calendar-day .cal-item { font-size: 0.7rem; background: var(--accent-glow); color: var(--accent); padding: 3px 6px; border-radius: 3px; margin-bottom: 3px; cursor: pointer; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .calendar-day.empty { background: transparent; border-color: transparent; }
-        .calendar-day.today { border-color: var(--accent); }
-
-        /* AI PANEL */
-        .ai-panel { background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; margin-bottom: 24px; }
-        .ai-panel h3 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
-        .ai-panel p.desc { font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 16px; }
-        .ai-result { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px; margin-top: 16px; font-size: 0.88rem; line-height: 1.7; white-space: pre-wrap; color: var(--text-secondary); max-height: 400px; overflow-y: auto; }
-        .ai-result.loading { text-align: center; color: var(--accent); font-weight: 600; }
-        .api-key-bar { background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 20px; margin-bottom: 24px; display: flex; gap: 12px; align-items: center; }
-        .api-key-bar label { font-size: 0.78rem; font-weight: 700; color: var(--text-secondary); white-space: nowrap; }
-        .api-key-bar input { flex: 1; background: var(--bg-input); border: 1px solid var(--border); color: var(--text-primary); padding: 10px 12px; border-radius: var(--radius-sm); font-size: 0.85rem; font-family: 'Courier New', monospace; }
-        .api-key-bar input:focus { outline: none; border-color: var(--accent); }
-
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-
-        /* CHECKLIST */
-        .note-item { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); }
-        .note-item:last-child { border-bottom: none; }
-        .note-item input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--accent); cursor: pointer; flex-shrink: 0; margin-top: 2px; }
-        .note-item .note-text { flex: 1; font-size: 0.85rem; color: var(--text-secondary); }
-        .note-item .note-text.done { text-decoration: line-through; color: var(--text-tertiary); }
-        .add-note-row { display: flex; gap: 8px; margin-top: 10px; }
-
-        .tag { display: inline-flex; align-items: center; padding: 3px 8px; border-radius: 3px; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px; background: var(--bg-card); color: var(--text-secondary); border: 1px solid var(--border); margin-right: 4px; }
-
-        /* TOAST */
-        #toast-container { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 9999; }
-        .toast { background: var(--bg-panel); color: var(--text-primary); padding: 14px 20px; border-radius: var(--radius-sm); box-shadow: var(--shadow-lg); font-size: 0.88rem; font-weight: 500; border-left: 4px solid var(--accent); animation: toastIn 0.3s ease forwards, toastOut 0.3s 3.5s forwards; max-width: 380px; }
-        .toast.success { border-left-color: var(--green); }
-        .toast.error { border-left-color: var(--red); }
-        @keyframes toastIn { from { transform: translateX(120%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-        @keyframes toastOut { to { transform: translateX(120%); opacity: 0; } }
-
-        /* TIMER DISPLAY */
-        .timer-display { font-size: 4rem; font-weight: 900; font-family: 'Courier New', monospace; color: var(--accent); margin: 20px 0; letter-spacing: 4px; text-align: center; }
-        .timer-running { color: var(--green); animation: timerPulse 1s ease infinite; }
-        @keyframes timerPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
-
-        /* RESPONSIVE */
-        @media (max-width: 900px) {
-            .sidebar { position: fixed; left: 0; top: 0; bottom: 0; transform: translateX(-100%); z-index: 90; box-shadow: var(--shadow-lg); }
-            .sidebar.open { transform: translateX(0); }
-            .menu-toggle { display: flex; }
-            .main-content { padding: 20px 16px; padding-top: 56px; }
-            .grid-2 { grid-template-columns: 1fr; }
-            .kanban-board { height: calc(100vh - 160px); }
-            .kanban-col { flex: 0 0 260px; }
-            .stats-row { grid-template-columns: repeat(2, 1fr); }
-            .calendar-grid { grid-template-columns: repeat(4, 1fr); }
-            .phrase-row { grid-template-columns: 1fr; }
-            .timer-display { font-size: 3rem; }
-        }
-        @media (max-width: 500px) {
-            .stats-row { grid-template-columns: 1fr; }
-            .calendar-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-
-        .sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 80; }
-        .sidebar-overlay.open { display: block; }
-    </style>
+@media (max-width: 900px) { .sidebar { position: fixed; left: 0; top: 0; bottom: 0; transform: translateX(-100%); z-index: 90; } .sidebar.open { transform: translateX(0); } .menu-toggle { display: flex; } .main-content { padding: 20px 16px; padding-top: 60px; } .grid-2 { grid-template-columns: 1fr; } .kanban-col { flex: 0 0 260px; } }
+</style>
 </head>
+<body>
+
+<button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+        <h1>ISM Command</h1><p>Inglés Sin Miedo</p>
+    </div>
+    <nav class="sidebar-nav">
+        <div class="nav-label">Organización</div>
+        <button class="nav-btn active" onclick="goTo('dashboard', this)">  Dashboard</button>
+        <button class="nav-btn" onclick="goTo('table', this)">🗄️ Base de Datos</button>
+        <button class="nav-btn" onclick="goTo('kanban', this)">📋 Kanban Pipeline</button>
+        <button class="nav-btn" onclick="goTo('calendar', this)">📅 Calendario</button>
+        
+        <div class="nav-label">Fábrica de Contenido IA</div>
+        <button class="nav-btn" onclick="goTo('ai-scripts', this)">📝 Generar Guiones</button>
+        <button class="nav-btn" onclick="goTo('ai-seo', this)">🎯 Títulos & SEO</button>
+        <button class="nav-btn" onclick="goTo('ai-linkedin', this)">💼 Post para LinkedIn</button>
+        
+        <div class="nav-label">Productividad</div>
+        <button class="nav-btn" onclick="goTo('pomodoro', this)">⏱️ Modo Enfoque</button>
+        <button class="nav-btn" onclick="goTo('settings', this)">⚙️ Configuración</button>
+    </nav>
+    <div class="sidebar-footer">v4.0 PRO · LocalStorage</div>
+</aside>
+
+<div class="main-content">
+    <!-- DASHBOARD -->
+    <div class="view active" id="v-dashboard">
+        <div class="page-header"><h2>  Dashboard General</h2><p>Control total de tu canal. Sin miedo al algoritmo.</p></div>
+        <div class="stats-row">
+            <div class="stat-card"><div class="label">Total Videos</div><div class="number" id="s-total">0</div></div>
+            <div class="stat-card"><div class="label">Ideas / Guión</div><div class="number" style="color:var(--text-secondary)" id="s-idea">0</div></div>
+            <div class="stat-card"><div class="label">En Edición</div><div class="number" style="color:var(--yellow)" id="s-edit">0</div></div>
+            <div class="stat-card"><div class="label">Listos</div><div class="number" style="color:var(--green)" id="s-ready">0</div></div>
+            <div class="stat-card"><div class="label">Publicados</div><div class="number" style="color:var(--cyan)" id="s-pub">0</div></div>
+        </div>
+        <div class="progress-container">
+            <div class="progress-header"><h3>Progreso del Pipeline</h3><span id="progress-pct">0%</span></div>
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progress-fill" style="width:0%"></div></div>
+        </div>
+    </div>
+
+    <!-- TABLA -->
+    <div class="view" id="v-table">
+        <div class="page-header"><h2>🗄️ Base de Datos Completa</h2><p>Tus 30 guiones originales. Clic para editar.</p></div>
+        <div class="table-wrapper">
+            <table>
+                <thead><tr><th>Tema</th><th>Estado</th><th>Categoría</th><th>Frase Principal (Inglés)</th></tr></thead>
+                <tbody id="tableBody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- KANBAN -->
+    <div class="view" id="v-kanban">
+        <div class="page-header"><h2>📋 Pipeline de Producción</h2><p>Arrastra las tarjetas para cambiar su estado visualmente.</p></div>
+        <div class="kanban-board" id="kanbanBoard"></div>
+    </div>
+
+    <!-- CALENDARIO -->
+    <div class="view" id="v-calendar">
+        <div class="page-header"><h2>📅 Frecuencia de Publicación</h2><p>Planifica tus Shorts para mantener la consistencia.</p></div>
+        <div style="display:flex; gap:12px; align-items:center; margin-bottom:20px;">
+            <button class="btn btn-secondary btn-sm" onclick="changeMonth(-1)">◀ Mes Anterior</button>
+            <h3 id="calendarTitle"></h3>
+            <button class="btn btn-secondary btn-sm" onclick="changeMonth(1)">Mes Siguiente ▶</button>
+        </div>
+        <div class="calendar-grid" id="calendarGrid"></div>
+    </div>
+
+    <!-- IA SCRIPTS -->
+    <div class="view" id="v-ai-scripts">
+        <div class="page-header"><h2>📝 Creador de Guiones (Gemini)</h2><p>Genera 5 frases con español, inglés y fonética para nuevos videos.</p></div>
+        <div class="ai-panel">
+            <div class="form-group"><label>Tema del nuevo video</label><input type="text" class="form-input" id="aiTopic" placeholder="Ej: Pidiendo vacaciones"></div>
+            <button class="btn btn-ai" onclick="aiGenerateScript()">✨ Generar Guion</button>
+            <div class="ai-result" id="aiScriptResult" style="display:none;"></div>
+            <button class="btn btn-primary btn-sm" id="btnSaveScript" style="display:none; margin-top:10px;" onclick="injectAiScript()">💾 Guardar en Base de Datos</button>
+        </div>
+    </div>
+
+    <!-- IA SEO -->
+    <div class="view" id="v-ai-seo">
+        <div class="page-header"><h2>🎯 Generador SEO</h2><p>Títulos virales y descripciones optimizadas basadas en tus videos.</p></div>
+        <div class="ai-panel">
+            <div class="form-group"><label>Selecciona un video de tu Base de Datos</label><select class="form-select" id="seoSelect"></select></div>
+            <button class="btn btn-ai" onclick="aiGenerateSEO()">✨ Generar SEO Completo</button>
+            <div class="ai-result" id="aiSeoResult" style="display:none;"></div>
+        </div>
+    </div>
+    
+    <!-- IA LINKEDIN -->
+    <div class="view" id="v-ai-linkedin">
+        <div class="page-header"><h2>💼 Reciclador a LinkedIn</h2><p>Transforma el guion de un Short en un Carrusel o Post de LinkedIn.</p></div>
+        <div class="ai-panel">
+            <div class="form-group"><label>Selecciona un video</label><select class="form-select" id="linkedinSelect"></select></div>
+            <button class="btn btn-ai" onclick="aiGenerateLinkedIn()">✨ Generar Post</button>
+            <div class="ai-result" id="aiLinkedinResult" style="display:none;"></div>
+        </div>
+    </div>
+
+    <!-- POMODORO -->
+    <div class="view" id="v-pomodoro">
+        <div class="page-header"><h2>⏱️ Modo Enfoque (Pomodoro)</h2><p>Trabaja "sin miedo" y sin distracciones. Bloques de 25 minutos.</p></div>
+        <div class="ai-panel" style="text-align: center; max-width: 500px; margin: 0 auto;">
+            <h3 id="timerLabel">Tiempo de Trabajo</h3>
+            <div class="timer-display" id="timerDisplay">25:00</div>
+            <div style="display:flex; justify-content:center; gap:10px;">
+                <button class="btn btn-primary" onclick="startTimer()">▶ Iniciar</button>
+                <button class="btn btn-secondary" onclick="pauseTimer()">⏸ Pausar</button>
+                <button class="btn btn-danger" onclick="resetTimer()">🔄 Reiniciar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONFIGURACIÓN -->
+    <div class="view" id="v-settings">
+        <div class="page-header"><h2>⚙️ Configuración y Backups</h2><p>Tus datos están en tu navegador. Exporta para no perderlos.</p></div>
+        <div class="ai-panel">
+            <h3>🔑 API Key de Gemini (Gratis)</h3>
+            <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:10px;">Consigue tu clave en Google AI Studio para activar la Fábrica de Contenido.</p>
+            <div style="display:flex; gap:10px;">
+                <input type="password" class="form-input" id="apiKeyInput" placeholder="AIzaSy...">
+                <button class="btn btn-primary" onclick="saveApiKey()">Guardar</button>
+            </div>
+        </div>
+        <div class="grid-2">
+            <div class="ai-panel" style="border-color:var(--green)">
+                <h3 style="color:var(--green)">⬇️ Exportar Datos</h3>
+                <p style="font-size:0.85rem; margin-bottom:10px;">Descarga tu base de datos completa en un archivo JSON.</p>
+                <button class="btn btn-secondary" onclick="exportDB()">Descargar Backup</button>
+            </div>
+            <div class="ai-panel" style="border-color:var(--red)">
+                <h3 style="color:var(--red)">⬆️ Importar Datos</h3>
+                <p style="font-size:0.85rem; margin-bottom:10px;">Carga un archivo JSON previo. Sobrescribirá los actuales.</p>
+                <input type="file" id="importFile" accept=".json" class="form-input" style="margin-bottom:10px;">
+                <button class="btn btn-danger" onclick="importDB()">Restaurar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL PARA EDITAR VIDEOS -->
+<div class="modal-overlay" id="modal">
+    <div class="modal">
+        <div class="modal-head">
+            <h3 id="modalTitle">Detalle del Video</h3>
+            <button class="btn btn-secondary btn-sm" onclick="document.getElementById('modal').classList.remove('open')">X</button>
+        </div>
+        <div class="modal-body" id="modalBody"></div>
+    </div>
+</div>
+
+<div id="toast-container"></div>
+<script>
+// ==========================================
+// 1. BASE DE DATOS MAESTRA (30 VIDEOS)
+// ==========================================
+const SEED_DATA = [
+  { id:1001, tema:"Sobrevivir a Zoom", estado:"pub", date:"2026-04-02", category:"Reuniones", frases:[{esp:"¿Me escuchan?",eng:"Can you hear me?",fon:"/kan iú jír mi/"},{esp:"Estás en mute",eng:"You are on mute",fon:"/iú ar on miút/"},{esp:"Se cortó tu audio",eng:"You cut out",fon:"/iú kot áut/"},{esp:"Vayamos al grano",eng:"Let's get to the point",fon:"/lets guet tu de póint/"},{esp:"Tengo que irme",eng:"I have to jump off",fon:"/ái jav tu yomp of/"}] },
+  { id:1002, tema:"Escapando con Elegancia", estado:"pub", date:"2026-04-04", category:"Social", frases:[{esp:"Ahora no puedo",eng:"I can't right now",fon:"/ái kant rráit náu/"},{esp:"Estoy a tope de trabajo",eng:"I am swamped",fon:"/ái am suámpt/"},{esp:"Lo reviso luego",eng:"I will check it later",fon:"/ái uil chek it léi-ter/"},{esp:"Hablamos mañana",eng:"Let's talk tomorrow",fon:"/lets tok tu-MÓ-rrou/"},{esp:"Buen fin de semana",eng:"Have a great weekend",fon:"/jav a gréit uí-kend/"}] },
+  { id:1003, tema:"El Clásico Email", estado:"pub", date:"2026-04-07", category:"Emails", frases:[{esp:"Adjunto el archivo",eng:"Please find attached",fon:"/plís fáind a-TACHT/"},{esp:"Como acordamos",eng:"As agreed",fon:"/as a-GRÍD/"},{esp:"Quedo atento",eng:"Looking forward",fon:"/lú-king fór-uard/"},{esp:"Solo para confirmar",eng:"Just to confirm",fon:"/yost tu kon-FÉRM/"},{esp:"Saludos cordiales",eng:"Best regards",fon:"/best ri-GÁRDS/"}] },
+  { id:1004, tema:"Pidiendo Ayuda", estado:"ready", date:"2026-04-09", category:"Social", frases:[{esp:"Dame una mano",eng:"Give me a hand",fon:"/guív mi a jand/"},{esp:"No entiendo esto",eng:"I don't get this",fon:"/ái dóunt guet dis/"},{esp:"¿Tienes un minuto?",eng:"Got a minute?",fon:"/got a MÍ-nit/"},{esp:"Necesito un favor",eng:"I need a favor",fon:"/ái níd a féi-vor/"},{esp:"Sácame de dudas",eng:"Clarify this for me",fon:"/KLÁ-ri-fai dis for mi/"}] },
+  { id:1005, tema:"Viernes por la Tarde", estado:"ready", date:"2026-04-11", category:"Social", frases:[{esp:"Ya casi terminamos",eng:"We are almost done",fon:"/uí ar ól-moust don/"},{esp:"Terminemos por hoy",eng:"Let's call it a day",fon:"/lets kol it a déi/"},{esp:"Qué semana tan larga",eng:"What a week",fon:"/uát a uík/"},{esp:"Nos vemos el lunes",eng:"See you Monday",fon:"/sí iú món-dei/"},{esp:"A descansar",eng:"Time to rest",fon:"/táim tu rrest/"}] },
+  { id:1006, tema:"Cometiendo Errores", estado:"edit", date:"", category:"Profesional", frases:[{esp:"Fue culpa mía",eng:"My bad",fon:"/mái bad/"},{esp:"Hubo un error",eng:"There was a mistake",fon:"/dér uas a mis-TÉIK/"},{esp:"Lo solucionaré rápido",eng:"I will fix it",fon:"/ái uil fiks it/"},{esp:"Siento la demora",eng:"Sorry for the delay",fon:"/SÓ-rri for de di-LÉI/"},{esp:"No volverá a pasar",eng:"It won't happen again",fon:"/it uóunt JÁ-pen a-GUÉN/"}] },
+  { id:1007, tema:"Ganando Tiempo", estado:"edit", date:"", category:"Reuniones", frases:[{esp:"Déjame pensarlo",eng:"Let me think about it",fon:"/let mi zink a-BÁUT it/"},{esp:"Lo averiguo pronto",eng:"I will find out",fon:"/ái uil fáind áut/"},{esp:"Dame un momento",eng:"Give me a moment",fon:"/guív mi a MÓU-ment/"},{esp:"Te aviso luego",eng:"I will let you know",fon:"/ái uil let iú nóu/"},{esp:"Buena pregunta",eng:"That is a good question",fon:"/dats a gud KUÉS-chon/"}] },
+  { id:1008, tema:"El Jefe te Llama", estado:"audio", date:"", category:"Profesional", frases:[{esp:"Dime",eng:"Tell me",fon:"/tel mi/"},{esp:"¿En qué ayudo?",eng:"How can I help?",fon:"/jáu kan ái jelp/"},{esp:"Buena idea",eng:"Good call",fon:"/gud kol/"},{esp:"Me encargo de eso",eng:"I will handle it",fon:"/ái uil JÁN-dol it/"},{esp:"Entendido",eng:"Understood",fon:"/ón-der-STÚD/"}] },
+  { id:1009, tema:"Networking Casual", estado:"audio", date:"", category:"Social", frases:[{esp:"Encantado de conocerte",eng:"Nice to meet you",fon:"/náis tu mít iú/"},{esp:"A qué te dedicas",eng:"What do you do?",fon:"/uát du iú du/"},{esp:"¿De dónde eres?",eng:"Where are you from?",fon:"/uér ar iú from/"},{esp:"Tienes LinkedIn",eng:"Are you on LinkedIn?",fon:"/ar iú on línkt-in/"},{esp:"Sigamos en contacto",eng:"Let's stay in touch",fon:"/lets stéi in toch/"}] },
+  { id:1010, tema:"Elogiando al Equipo", estado:"idea", date:"", category:"Profesional", frases:[{esp:"Excelente trabajo",eng:"Outstanding work",fon:"/aut-STÁN-ding uérk/"},{esp:"Bien hecho",eng:"Well done",fon:"/uél don/"},{esp:"Eres un genio",eng:"You are a lifesaver",fon:"/iúr a LÁIF-sei-ver/"},{esp:"Gran aporte",eng:"Great input",fon:"/gréit ÍN-put/"},{esp:"Sigamos así",eng:"Keep it up",fon:"/kíp it op/"}] },
+  { id:1011, tema:"Apagando Incendios", estado:"idea", date:"", category:"Profesional", frases:[{esp:"Es urgente",eng:"It is urgent",fon:"/its ÉR-yent/"},{esp:"Problema grave",eng:"Major issue",fon:"/MÉI-yor Í-shu/"},{esp:"Rápido por favor",eng:"ASAP please",fon:"/éi-es-éi-pi plís/"},{esp:"Detén todo",eng:"Hold everything",fon:"/jóld É-vri-zing/"},{esp:"Tenemos que hablar",eng:"We need to talk",fon:"/uí níd tu tok/"}] },
+  { id:1012, tema:"Cansancio Laboral", estado:"idea", date:"", category:"Social", frases:[{esp:"Estoy agotado",eng:"I am exhausted",fon:"/ái am ek-SÓS-ted/"},{esp:"Día muy largo",eng:"Long day",fon:"/long déi/"},{esp:"Necesito café",eng:"I need coffee",fon:"/ái níd KÓ-fi/"},{esp:"Mi cerebro está frito",eng:"My brain is fried",fon:"/mái bréin is fráid/"},{esp:"Ya no puedo más",eng:"I am done for today",fon:"/ái am don for tu-DÉI/"}] },
+  { id:1013, tema:"Cobrando el Sueldo", estado:"idea", date:"", category:"Social", frases:[{esp:"Hoy pagan",eng:"Payday today",fon:"/PÉI-dei tu-DÉI/"},{esp:"Envía la factura",eng:"Send the invoice",fon:"/send di ÍN-vois/"},{esp:"¿Ya depositaron?",eng:"Did we get paid?",fon:"/did uí guet péid/"},{esp:"Revisa tu cuenta",eng:"Check your account",fon:"/chek iúr a-KÁUNT/"},{esp:"Invito el almuerzo",eng:"Lunch is on me",fon:"/lonch is on mi/"}] },
+  { id:1014, tema:"Chismes de Oficina", estado:"idea", date:"", category:"Social", frases:[{esp:"¿Te enteraste?",eng:"Did you hear?",fon:"/did iú jír/"},{esp:"No me digas",eng:"No way",fon:"/nóu uéi/"},{esp:"Es un secreto",eng:"It is a secret",fon:"/its a SÍ-kret/"},{esp:"Solo entre nosotros",eng:"Just between us",fon:"/yost bi-TUÍN os/"},{esp:"Quién lo diría",eng:"Who would have thought",fon:"/jú uud jav zot/"}] },
+  { id:1015, tema:"Pidiendo Permisos", estado:"idea", date:"", category:"Profesional", frases:[{esp:"Llego tarde",eng:"I am running late",fon:"/ái am RÓ-ning léit/"},{esp:"Me siento mal",eng:"I feel sick",fon:"/ái fíl sik/"},{esp:"Tengo cita médica",eng:"I have a doctor appointment",fon:"/ái jav a DÓK-tor a-PÓINT-ment/"},{esp:"Saldré temprano",eng:"I am leaving early",fon:"/ái am LÍ-ving ÉR-li/"},{esp:"Tomaré un día libre",eng:"I am taking a day off",fon:"/ái am TÉI-king a déi of/"}] },
+  { id:1016, tema:"Celebrando Éxitos", estado:"idea", date:"", category:"Social", frases:[{esp:"Lo logramos",eng:"We did it",fon:"/uí did it/"},{esp:"Misión cumplida",eng:"Mission accomplished",fon:"/MÍ-shon a-KÓM-plisht/"},{esp:"Trato cerrado",eng:"Deal closed",fon:"/díl klóusd/"},{esp:"Récord de ventas",eng:"Sales record",fon:"/séils RÉ-kord/"},{esp:"A celebrar",eng:"Let's celebrate",fon:"/lets SÉ-le-bréit/"}] },
+  { id:1017, tema:"Excusas Clásicas", estado:"idea", date:"", category:"Social", frases:[{esp:"Se fue el internet",eng:"My internet dropped",fon:"/mái ÍN-ter-net dropt/"},{esp:"El tráfico estaba feo",eng:"Traffic was bad",fon:"/TRÁ-fik uas bad/"},{esp:"No vi tu correo",eng:"I missed your email",fon:"/ái mist iúr Í-meil/"},{esp:"Estaba en otra reunión",eng:"I was in another meeting",fon:"/ái uas in a-NÓ-der MÍ-ting/"},{esp:"Mi alarma no sonó",eng:"My alarm didn't go off",fon:"/mái a-LÁRM DÍ-dent góu of/"}] },
+  { id:1018, tema:"Frustración Tecnológica", estado:"idea", date:"", category:"Profesional", frases:[{esp:"La compu está lenta",eng:"My computer is slow",fon:"/mái kom-PIÚT-er is slóu/"},{esp:"Olvidé mi contraseña",eng:"I forgot my password",fon:"/ái for-GÓT mái PÁS-uord/"},{esp:"El sistema se cayó",eng:"The system is down",fon:"/de SÍS-tem is dáun/"},{esp:"No carga",eng:"It is not loading",fon:"/its not LÓU-ding/"},{esp:"Necesito soporte",eng:"I need IT support",fon:"/ái níd ái tí su-PÓRT/"}] },
+  { id:1019, tema:"Mostrando Empatía", estado:"idea", date:"", category:"Social", frases:[{esp:"Te entiendo",eng:"I hear you",fon:"/ái jír iú/"},{esp:"No te preocupes",eng:"Do not worry",fon:"/du not UÓ-rri/"},{esp:"Pasa todo el tiempo",eng:"It happens all the time",fon:"/it JÁ-pens ol de táim/"},{esp:"Tómate tu tiempo",eng:"Take your time",fon:"/téik iúr táim/"},{esp:"Estamos juntos en esto",eng:"We are in this together",fon:"/uír in dis tu-GUÉ-der/"}] },
+  { id:1020, tema:"Acordando Plazos", estado:"idea", date:"", category:"Profesional", frases:[{esp:"Para cuándo es",eng:"When is it due?",fon:"/uen is it diú/"},{esp:"Te lo doy mañana",eng:"You will have it tomorrow",fon:"/iúl jav it tu-MÓ-rrou/"},{esp:"Dame dos días",eng:"Give me two days",fon:"/guív mi tu déis/"},{esp:"Sin prisa",eng:"No rush",fon:"/nóu rosh/"},{esp:"Lo antes posible",eng:"As soon as possible",fon:"/as sun as PÓ-si-bol/"}] },
+  { id:1021, tema:"Siendo Diplomático", estado:"idea", date:"", category:"Reuniones", frases:[{esp:"Quizás otra opción",eng:"Maybe another option",fon:"/MÉI-bi a-NÓ-der ÓP-shon/"},{esp:"Es interesante pero",eng:"It is interesting but",fon:"/its ÍN-tres-ting bot/"},{esp:"Lo tendré en cuenta",eng:"I will keep that in mind",fon:"/ái uil kíp dat in máind/"},{esp:"Vamos a evaluarlo",eng:"Let's evaluate it",fon:"/lets e-VÁ-liu-eit it/"},{esp:"Gracias por el aporte",eng:"Thanks for the input",fon:"/zanks for di ÍN-put/"}] },
+  { id:1022, tema:"Entrevista de Trabajo", estado:"idea", date:"", category:"Profesional", frases:[{esp:"Mis fortalezas son",eng:"My strengths are",fon:"/mái strénzs ar/"},{esp:"Trabajo bien en equipo",eng:"I am a team player",fon:"/ái am a tím PLÉI-er/"},{esp:"Me encantan los retos",eng:"I love challenges",fon:"/ái lov CHÁ-len-yes/"},{esp:"Tengo experiencia en",eng:"I have experience in",fon:"/ái jav eks-PÍ-ri-ens in/"},{esp:"Cuándo empiezo",eng:"When do I start?",fon:"/uen du ái stárt/"}] },
+  { id:1023, tema:"Empezando la Mañana", estado:"idea", date:"", category:"Social", frases:[{esp:"Buenos días equipo",eng:"Good morning team",fon:"/gud MÓR-ning tím/"},{esp:"Qué hay de nuevo",eng:"What is new?",fon:"/uáts niú/"},{esp:"¿Listos para hoy?",eng:"Ready for today?",fon:"/RÉ-di for tu-DÉI/"},{esp:"Revisemos la agenda",eng:"Let's check the agenda",fon:"/lets chek di a-YÉN-da/"},{esp:"A darle con todo",eng:"Let's do this",fon:"/lets du dis/"}] },
+  { id:1024, tema:"Cuando Estás Confundido", estado:"idea", date:"", category:"Reuniones", frases:[{esp:"Me perdí",eng:"I am lost",fon:"/ái am lost/"},{esp:"Empieza de nuevo",eng:"Start over",fon:"/stárt ÓU-ver/"},{esp:"No sigo la idea",eng:"I am not following",fon:"/ái am not FÓ-lou-ing/"},{esp:"Explícamelo sencillo",eng:"Break it down for me",fon:"/bréik it dáun for mi/"},{esp:"Dame un ejemplo",eng:"Can you give an example?",fon:"/kan iú guív an ek-SÁM-pol/"}] },
+  { id:1025, tema:"Cambiando de Tema", estado:"idea", date:"", category:"Reuniones", frases:[{esp:"Por otro lado",eng:"On the other hand",fon:"/on di Ó-der jand/"},{esp:"Volviendo al punto",eng:"Getting back to the point",fon:"/GUÉ-ting bak tu de póint/"},{esp:"Cambiando de tema",eng:"Changing the subject",fon:"/CHÉIN-ying de SÓB-yekt/"},{esp:"Dejando eso de lado",eng:"Setting that aside",fon:"/SÉ-ting dat a-SÁID/"},{esp:"A propósito",eng:"By the way",fon:"/bái de uéi/"}] },
+  { id:1026, tema:"Motivando al Equipo", estado:"idea", date:"", category:"Profesional", frases:[{esp:"Confío en ustedes",eng:"I trust you guys",fon:"/ái trost iú gáis/"},{esp:"Son los mejores",eng:"You are the best",fon:"/iú ar de best/"},{esp:"Gran esfuerzo hoy",eng:"Great effort today",fon:"/gréit É-fort tu-DÉI/"},{esp:"Sigamos creciendo",eng:"Let's keep growing",fon:"/lets kíp GRÓU-ing/"},{esp:"El cielo es el límite",eng:"The sky is the limit",fon:"/de skái is de LÍ-mit/"}] },
+  { id:1027, tema:"Cuando Te Equivocas", estado:"idea", date:"", category:"Profesional", frases:[{esp:"Hablé muy pronto",eng:"I spoke too soon",fon:"/ái spóuk tu sun/"},{esp:"Lo entendí mal",eng:"I misunderstood",fon:"/ái mis-ón-der-STÚD/"},{esp:"Retiro lo dicho",eng:"I take that back",fon:"/ái téik dat bak/"},{esp:"Olviden lo que dije",eng:"Forget what I said",fon:"/for-GUÉT uát ái sed/"},{esp:"Empecemos de cero",eng:"Let's start from scratch",fon:"/lets stárt from skrách/"}] },
+  { id:1028, tema:"Despedidas Rápidas", estado:"idea", date:"", category:"Social", frases:[{esp:"Debo irme",eng:"I gotta run",fon:"/ái GÓ-ta ron/"},{esp:"Hablamos luego",eng:"Catch you later",fon:"/kach iú LÉI-ter/"},{esp:"Cuídate mucho",eng:"Take care",fon:"/téik kér/"},{esp:"Fue un placer",eng:"It was a pleasure",fon:"/it uas a PLÉ-shur/"},{esp:"Hasta la próxima",eng:"Until next time",fon:"/on-TÍL nekst táim/"}] },
+  { id:1029, tema:"Lidiando con Clientes", estado:"idea", date:"", category:"Profesional", frases:[{esp:"En qué le ayudo",eng:"How can I help you?",fon:"/jáu kan ái jelp iú/"},{esp:"Revisaré su caso",eng:"I will look into your case",fon:"/ái uil luk ÍN-tu iúr kéis/"},{esp:"Gracias por esperar",eng:"Thank you for waiting",fon:"/zank iú for UÉI-ting/"},{esp:"Comprendo su molestia",eng:"I understand your frustration",fon:"/ái ón-der-STÁND iúr fros-TRÉI-shon/"},{esp:"Lo resolveremos hoy",eng:"We will solve it today",fon:"/uí uil solv it tu-DÉI/"}] },
+  { id:1030, tema:"Ideas Millonarias", estado:"idea", date:"", category:"Profesional", frases:[{esp:"Tengo una propuesta",eng:"I have a proposal",fon:"/ái jav a pro-PÓU-sal/"},{esp:"Pensemos en grande",eng:"Let's think big",fon:"/lets zink big/"},{esp:"Esto será un éxito",eng:"This will be a hit",fon:"/dis uil bi a jit/"},{esp:"Cuál es el retorno",eng:"What is the ROI?",fon:"/uát is di ar ou ái/"},{esp:"Manos a la obra",eng:"Let's get to work",fon:"/lets guet tu uérk/"}] }
+];
+
+// ==========================================
+// 2. ESTADO Y LOCAL STORAGE
+// ==========================================
+let db = [];
+let draggedId = null;
+let currentModalId = null;
+let calendarDate = new Date();
+let currentAiScript = null; // Para guardar temporalmente guion generado
+
+function initApp() {
+    const stored = localStorage.getItem('ism_db_v4');
+    if (stored) {
+        db = JSON.parse(stored);
+    } else {
+        db = JSON.parse(JSON.stringify(SEED_DATA)); // Clon profundo
+        saveDB();
+    }
+    document.getElementById('apiKeyInput').value = localStorage.getItem('ism_gemini_key') || '';
+    refreshAll();
+}
+
+function saveDB() {
+    localStorage.setItem('ism_db_v4', JSON.stringify(db));
+    refreshAll();
+}
+
+function getApiKey() { return localStorage.getItem('ism_gemini_key'); }
+function saveApiKey() {
+    const k = document.getElementById('apiKeyInput').value.trim();
+    localStorage.setItem('ism_gemini_key', k);
+    toast('API Key guardada.', 'success');
+}
+
+// ==========================================
+// 3. NAVEGACIÓN Y RENDER GENERAL
+// ==========================================
+function goTo(viewId, btn) {
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('v-' + viewId).classList.add('active');
+    btn.classList.add('active');
+    if (window.innerWidth <= 900) toggleSidebar();
+}
+
+function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); }
+
+function refreshAll() {
+    renderDashboard(); renderTable(); renderKanban(); renderCalendar(); populateSelectors();
+}
+
+// ==========================================
+// 4. VISTAS ESPECÍFICAS
+// ==========================================
+function renderDashboard() {
+    const counts = { idea:0, audio:0, edit:0, ready:0, pub:0 };
+    db.forEach(v => { if(counts[v.estado] !== undefined) counts[v.estado]++; });
+    const total = db.length;
+    const done = counts.pub + counts.ready;
+    const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+
+    document.getElementById('s-total').innerText = total;
+    document.getElementById('s-idea').innerText = counts.idea;
+    document.getElementById('s-edit').innerText = counts.edit;
+    document.getElementById('s-ready').innerText = counts.ready;
+    document.getElementById('s-pub').innerText = counts.pub;
+    document.getElementById('progress-pct').innerText = pct + '%';
+    document.getElementById('progress-fill').style.width = pct + '%';
+}
+
+function renderTable() {
+    const tbody = document.getElementById('tableBody');
+    tbody.innerHTML = db.map(v => `
+        <tr onclick="openModal(${v.id})">
+            <td style="font-weight:700;">${v.tema}</td>
+            <td><span class="badge badge-${v.estado}">${v.estado.toUpperCase()}</span></td>
+            <td>${v.category}</td>
+            <td style="color:var(--text-secondary);">${v.frases[0].eng}</td>
+        </tr>
+    `).join('');
+}
+
+function renderKanban() {
+    const cols = [
+        { key:'idea', label:'Ideas / Guión' }, { key:'audio', label:'Audio IA' },
+        { key:'edit', label:'En Edición' }, { key:'ready', label:'Listo' }, { key:'pub', label:'Publicado' }
+    ];
+    document.getElementById('kanbanBoard').innerHTML = cols.map(col => {
+        const items = db.filter(v => v.estado === col.key);
+        return `
+        <div class="kanban-col" ondragover="event.preventDefault()" ondrop="dropCard(event, '${col.key}')">
+            <div class="kanban-col-header"><span>${col.label}</span><span>${items.length}</span></div>
+            <div class="kanban-col-body">
+                ${items.map(v => `
+                    <div class="kanban-card" draggable="true" ondragstart="dragStart(${v.id})" onclick="openModal(${v.id})">
+                        <div class="kanban-card-title">${v.tema}</div>
+                        <div class="kanban-card-phrase">"${v.frases[0].eng}"</div>
+                    </div>
+                `).join('')}
+            </div>
+        </div>`;
+    }).join('');
+}
+
+function dragStart(id) { draggedId = id; }
+function dropCard(e, newStatus) {
+    e.preventDefault();
+    if(draggedId) {
+        const idx = db.findIndex(v => v.id === draggedId);
+        if(idx !== -1) { db[idx].estado = newStatus; saveDB(); }
+        draggedId = null;
+    }
+}
+
+function renderCalendar() {
+    const grid = document.getElementById('calendarGrid');
+    const title = document.getElementById('calendarTitle');
+    const year = calendarDate.getFullYear(), month = calendarDate.getMonth();
+    const monthNames = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+    title.innerText = `${monthNames[month]} ${year}`;
+
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    let html = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'].map(d => `<div style="text-align:center;font-size:0.7rem;color:var(--text-tertiary)">${d}</div>`).join('');
+    
+    for(let i=0; i<firstDay; i++) html += `<div></div>`;
+    for(let d=1; d<=daysInMonth; d++) {
+        const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+        const vids = db.filter(v => v.date === dateStr);
+        html += `<div class="calendar-day"><div style="font-size:0.7rem; margin-bottom:4px;">${d}</div>
+                 ${vids.map(v=>`<div class="cal-item" onclick="openModal(${v.id})">${v.tema}</div>`).join('')}</div>`;
+    }
+    grid.innerHTML = html;
+}
+function changeMonth(d) { calendarDate.setMonth(calendarDate.getMonth() + d); renderCalendar(); }
+
+// ==========================================
+// 5. INTEGRACIÓN GEMINI IA
+// ==========================================
+async function callGemini(prompt) {
+    const key = getApiKey();
+    if (!key) { toast('Falta la API Key en Configuración.', 'error'); return null; }
+    try {
+        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${key}`, {
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+        });
+        const data = await res.json();
+        if(data.error) throw new Error(data.error.message);
+        return data.candidates[0].content.parts[0].text;
+    } catch(e) { toast('Error IA: ' + e.message, 'error'); return null; }
+}
+
+async function aiGenerateScript() {
+    const topic = document.getElementById('aiTopic').value.trim();
+    if(!topic) { toast('Ingresa un tema.', 'error'); return; }
+    
+    const resEl = document.getElementById('aiScriptResult');
+    const btnSave = document.getElementById('btnSaveScript');
+    resEl.style.display = 'block'; resEl.innerText = '⏳ Pensando (actuando sin miedo)...'; btnSave.style.display = 'none';
+
+    const prompt = `Eres un experto enseñando inglés corporativo en el canal de YouTube Shorts "Inglés Sin Miedo". Crea 5 frases útiles sobre: "${topic}".
+Responde EXCLUSIVAMENTE en este formato JSON exacto:
+[
+  {"esp":"frase en español", "eng":"frase en inglés", "fon":"/fonética figurada intuitiva/"},
+  ... (5 elementos)
+]`;
+    const resp = await callGemini(prompt);
+    if(resp) {
+        try {
+            const clean = resp.replace(/```json/g, '').replace(/```/g, '').trim();
+            const frases = JSON.parse(clean);
+            currentAiScript = { tema: topic, frases: frases };
+            resEl.innerText = JSON.stringify(frases, null, 2);
+            btnSave.style.display = 'inline-block';
+        } catch(e) { resEl.innerText = resp; toast('No se pudo parsear a JSON. Reintenta.', 'error'); }
+    }
+}
+
+function injectAiScript() {
+    if(currentAiScript) {
+        db.push({
+            id: Date.now(), tema: currentAiScript.tema, estado: 'idea', category: 'General',
+            date: new Date().toISOString().split('T')[0], frases: currentAiScript.frases
+        });
+        saveDB();
+        document.getElementById('aiTopic').value = '';
+        document.getElementById('aiScriptResult').style.display = 'none';
+        document.getElementById('btnSaveScript').style.display = 'none';
+        toast('¡Guion inyectado a la Base de Datos!', 'success');
+    }
+}
+
+function populateSelectors() {
+    const opts = '<option value="">-- Selecciona un video --</option>' + db.map(v => `<option value="${v.id}">${v.tema}</option>`).join('');
+    const seoSel = document.getElementById('seoSelect'); if(seoSel) seoSel.innerHTML = opts;
+    const linSel = document.getElementById('linkedinSelect'); if(linSel) linSel.innerHTML = opts;
+}
+
+async function aiGenerateSEO() {
+    const id = document.getElementById('seoSelect').value;
+    if(!id) return;
+    const v = db.find(x => x.id == id);
+    const resEl = document.getElementById('aiSeoResult');
+    resEl.style.display = 'block'; resEl.innerText = '⏳ Optimizando SEO...';
+    
+    const frasesTxt = v.frases.map(f => `${f.esp} -> ${f.eng}`).join('\n');
+    const prompt = `Actúa como experto SEO para YouTube Shorts. Canal: "Inglés Sin Miedo". Video: "${v.tema}".\nContenido:\n${frasesTxt}\n\nGenera:\n1. Tres títulos virales (max 60 chars, con gancho).\n2. Una descripción corta para YouTube con un CTA potente y 5 hashtags.`;
+    
+    const resp = await callGemini(prompt);
+    if(resp) resEl.innerText = resp;
+}
+
+async function aiGenerateLinkedIn() {
+    const id = document.getElementById('linkedinSelect').value;
+    if(!id) return;
+    const v = db.find(x => x.id == id);
+    const resEl = document.getElementById('aiLinkedinResult');
+    resEl.style.display = 'block'; resEl.innerText = '⏳ Escribiendo post corporativo...';
+    
+    const frasesTxt = v.frases.map(f => `• ${f.esp}\n  ${f.eng} (${f.fon})`).join('\n\n');
+    const prompt = `Actúa como un Top Voice en LinkedIn enseñando inglés profesional. Convierte esto en un post que detenga el scroll.\nTema: "${v.tema}"\n\nFrases:\n${frasesTxt}\n\nIncluye: Hook agresivo en la primera línea, saltos de línea, emojis corporativos y CTA al final.`;
+    
+    const resp = await callGemini(prompt);
+    if(resp) resEl.innerText = resp;
+}
+
+// ==========================================
+// 6. POMODORO TIMER
+// ==========================================
+let timerInterval;
+let timeLeft = 25 * 60; // 25 minutes
+let isRunning = false;
+
+function updateTimerDisplay() {
+    let m = Math.floor(timeLeft / 60);
+    let s = timeLeft % 60;
+    document.getElementById('timerDisplay').innerText = `${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+}
+function startTimer() {
+    if(isRunning) return;
+    isRunning = true;
+    document.getElementById('timerDisplay').classList.add('timer-running');
+    timerInterval = setInterval(() => {
+        if(timeLeft > 0) { timeLeft--; updateTimerDisplay(); }
+        else { clearInterval(timerInterval); isRunning = false; document.getElementById('timerDisplay').classList.remove('timer-running'); toast('¡Bloque terminado! Descansa.', 'success'); }
+    }, 1000);
+}
+function pauseTimer() { clearInterval(timerInterval); isRunning = false; document.getElementById('timerDisplay').classList.remove('timer-running'); }
+function resetTimer() { pauseTimer(); timeLeft = 25 * 60; updateTimerDisplay(); }
+
+// ==========================================
+// 7. MODAL Y UTILIDADES
+// ==========================================
+function openModal(id) {
+    const v = db.find(x => x.id == id);
+    if(!v) return;
+    currentModalId = id;
+    document.getElementById('modalTitle').innerText = v.tema;
+    document.getElementById('modalBody').innerHTML = `
+        <div class="grid-2" style="margin-bottom:20px;">
+            <div class="form-group"><label>Estado</label>
+                <select class="form-select" id="modStatus" onchange="saveModal()">
+                    <option value="idea" ${v.estado=='idea'?'selected':''}>Idea / Guión</option>
+                    <option value="audio" ${v.estado=='audio'?'selected':''}>Audio IA</option>
+                    <option value="edit" ${v.estado=='edit'?'selected':''}>En Edición</option>
+                    <option value="ready" ${v.estado=='ready'?'selected':''}>Listo</option>
+                    <option value="pub" ${v.estado=='pub'?'selected':''}>Publicado</option>
+                </select>
+            </div>
+            <div class="form-group"><label>Fecha Publicación</label><input type="date" class="form-input" id="modDate" value="${v.date || ''}" onchange="saveModal()"></div>
+        </div>
+        <div style="background:var(--bg-card); padding:16px; border-radius:8px;">
+            ${v.frases.map(f => `<div style="margin-bottom:10px; border-bottom:1px solid var(--border); padding-bottom:10px;">
+                <div style="font-weight:700;">🇪🇸 ${f.esp}</div>
+                <div style="color:var(--accent);">🇬🇧 ${f.eng}</div>
+                <div style="color:var(--text-secondary); font-family:monospace;">🗣️ ${f.fon}</div>
+            </div>`).join('')}
+        </div>
+    `;
+    document.getElementById('modal').classList.add('open');
+}
+
+function saveModal() {
+    const v = db.find(x => x.id == currentModalId);
+    if(v) {
+        v.estado = document.getElementById('modStatus').value;
+        v.date = document.getElementById('modDate').value;
+        saveDB();
+        toast('Actualizado', 'success');
+    }
+}
+
+function exportDB() {
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(db));
+    const el = document.createElement('a'); el.setAttribute("href", dataStr); el.setAttribute("download", "ISM_Backup.json"); document.body.appendChild(el); el.click(); el.remove();
+}
+
+function importDB() {
+    const file = document.getElementById('importFile').files[0];
+    if(!file) return toast('Selecciona un archivo JSON', 'error');
+    const reader = new FileReader();
+    reader.onload = e => {
+        try { db = JSON.parse(e.target.result); saveDB(); toast('Datos restaurados', 'success'); }
+        catch(err) { toast('Error en el archivo', 'error'); }
+    };
+    reader.readAsText(file);
+}
+
+function toast(msg, type) {
+    const cont = document.getElementById('toast-container');
+    const t = document.createElement('div'); t.className = `toast ${type}`; t.innerText = msg;
+    cont.appendChild(t); setTimeout(() => t.remove(), 3000);
+}
+
+// INICIAR
+window.onload = initApp;
+</script>
+</body>
+</html>
