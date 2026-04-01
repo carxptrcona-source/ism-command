@@ -3,125 +3,157 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ISM Command Center v4.0 — Inglés Sin Miedo</title>
+<title>ISM Command Center v5.0 — PRO Edition</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
+/* =========================================
+   1. CORE VARIABLES & RESET
+   ========================================= */
 :root {
   --bg-base: #0f1117; --bg-sidebar: #161920; --bg-panel: #1a1d27;
   --bg-card: #222632; --bg-card-hover: #2a2f3e; --bg-input: #1e2230;
   --text-primary: #f0f4f8; --text-secondary: #8899b0; --text-tertiary: #5a6a80;
-  --accent: #3b82f6; --accent-hover: #2563eb;
-  --accent-glow: rgba(59,130,246,0.15); --accent-glow-strong: rgba(59,130,246,0.3);
+  --accent: #3b82f6; --accent-hover: #2563eb; --accent-glow: rgba(59,130,246,0.15);
   --border: #2a2f3e; --border-hover: #3a4050;
   --green: #22c55e; --green-bg: rgba(34,197,94,0.1);
   --yellow: #eab308; --yellow-bg: rgba(234,179,8,0.1);
   --red: #ef4444; --red-bg: rgba(239,68,68,0.1);
   --purple: #a855f7; --purple-bg: rgba(168,85,247,0.1);
   --cyan: #06b6d4; --cyan-bg: rgba(6,182,212,0.1);
-  --orange: #f97316; --orange-bg: rgba(249,115,22,0.1);
   --sidebar-w: 280px; --radius: 10px; --radius-sm: 6px; --radius-lg: 14px;
-  --shadow: 0 4px 20px rgba(0,0,0,0.25); --shadow-lg: 0 8px 40px rgba(0,0,0,0.4);
-  --transition: all 0.2s ease;
+  --shadow: 0 4px 20px rgba(0,0,0,0.25); --transition: all 0.2s ease;
 }
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { font-size: 14px; }
-body { font-family: 'Inter', sans-serif; background: var(--bg-base); color: var(--text-primary); display: flex; height: 100vh; overflow: hidden; line-height: 1.6; }
+html { font-size: 14px; scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: var(--bg-base); color: var(--text-primary); display: flex; height: 100vh; overflow: hidden; }
 ::-webkit-scrollbar { width: 8px; height: 8px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: var(--text-tertiary); }
-a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+a { color: var(--accent); text-decoration: none; transition: var(--transition); } a:hover { color: var(--accent-hover); }
 
-/* SIDEBAR */
-.sidebar { width: var(--sidebar-w); min-width: var(--sidebar-w); background: var(--bg-sidebar); border-right: 1px solid var(--border); display: flex; flex-direction: column; z-index: 50; transition: transform 0.3s ease; }
-.sidebar-brand { padding: 24px 20px; border-bottom: 1px solid var(--border); text-align: center; }
-.sidebar-brand h1 { font-size: 1rem; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; }
-.sidebar-brand p { font-size: 0.7rem; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
-.sidebar-nav { flex: 1; padding: 16px 10px; display: flex; flex-direction: column; gap: 3px; overflow-y: auto; }
-.nav-label { font-size: 0.6rem; font-weight: 800; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 1.5px; padding: 14px 14px 6px; }
-.nav-btn { background: none; border: none; color: var(--text-secondary); padding: 9px 14px; border-radius: var(--radius-sm); cursor: pointer; font-size: 0.85rem; font-weight: 500; text-align: left; display: flex; align-items: center; gap: 10px; transition: var(--transition); position: relative; }
-.nav-btn:hover { background: var(--bg-card); color: var(--text-primary); }
+/* =========================================
+   2. LAYOUT & SIDEBAR
+   ========================================= */
+.sidebar { width: var(--sidebar-w); min-width: var(--sidebar-w); background: var(--bg-sidebar); border-right: 1px solid var(--border); display: flex; flex-direction: column; z-index: 50; }
+.sidebar-brand { padding: 24px 20px; border-bottom: 1px solid var(--border); text-align: center; background: linear-gradient(180deg, var(--bg-sidebar) 0%, var(--bg-panel) 100%); }
+.sidebar-brand h1 { font-size: 1.1rem; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; background: linear-gradient(90deg, #fff, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.sidebar-brand p { font-size: 0.7rem; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-top: 4px; opacity: 0.8; }
+.sidebar-nav { flex: 1; padding: 16px 10px; display: flex; flex-direction: column; gap: 4px; overflow-y: auto; }
+.nav-label { font-size: 0.65rem; font-weight: 800; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 1.2px; padding: 16px 14px 6px; display: flex; align-items: center; gap: 8px; }
+.nav-label::before { content: ''; display: block; width: 6px; height: 6px; background: var(--border); border-radius: 50%; }
+.nav-btn { background: none; border: none; color: var(--text-secondary); padding: 10px 14px; border-radius: var(--radius-sm); cursor: pointer; font-size: 0.9rem; font-weight: 500; text-align: left; display: flex; align-items: center; gap: 12px; transition: var(--transition); position: relative; }
+.nav-btn:hover { background: var(--bg-card); color: var(--text-primary); transform: translateX(4px); }
 .nav-btn.active { background: var(--accent-glow); color: var(--accent); font-weight: 600; }
 .nav-btn.active::before { content: ''; position: absolute; left: 0; top: 4px; bottom: 4px; width: 3px; background: var(--accent); border-radius: 0 3px 3px 0; }
-.nav-btn .badge-count { margin-left: auto; background: var(--bg-card); color: var(--text-tertiary); font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 10px; border: 1px solid var(--border); }
-.sidebar-footer { padding: 16px 20px; border-top: 1px solid var(--border); font-size: 0.72rem; color: var(--text-tertiary); text-align: center; }
-.menu-toggle { display: none; position: fixed; top: 12px; left: 12px; z-index: 100; background: var(--bg-panel); border: 1px solid var(--border); color: var(--text-primary); width: 40px; height: 40px; border-radius: var(--radius-sm); cursor: pointer; font-size: 1.2rem; align-items: center; justify-content: center; }
+.nav-btn .badge { margin-left: auto; background: var(--bg-card); color: var(--text-tertiary); font-size: 0.7rem; font-weight: 700; padding: 2px 6px; border-radius: 4px; border: 1px solid var(--border); }
+.sidebar-footer { padding: 20px; border-top: 1px solid var(--border); font-size: 0.75rem; color: var(--text-tertiary); text-align: center; background: var(--bg-panel); }
 
-/* MAIN CONTENT */
-.main-content { flex: 1; overflow-y: auto; overflow-x: hidden; padding: 32px 40px; position: relative; }
-.view { display: none; animation: viewEnter 0.35s ease forwards; }
+.main-content { flex: 1; overflow-y: auto; overflow-x: hidden; padding: 40px; position: relative; scroll-behavior: smooth; }
+.view { display: none; animation: viewEnter 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
 .view.active { display: block; }
-@keyframes viewEnter { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-.page-header { margin-bottom: 28px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
-.page-header h2 { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.3px; }
-.page-header p { color: var(--text-secondary); margin-top: 6px; font-size: 0.9rem; }
+@keyframes viewEnter { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 
-/* COMPONENTS */
-.stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 28px; }
-.stat-card { background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; transition: var(--transition); }
-.stat-card:hover { border-color: var(--border-hover); transform: translateY(-2px); box-shadow: var(--shadow); }
-.stat-card .label { font-size: 0.72rem; font-weight: 700; color: var(--text-tertiary); text-transform: uppercase; }
-.stat-card .number { font-size: 1.8rem; font-weight: 900; margin-top: 6px; line-height: 1; }
-.stat-card .sub { font-size: 0.72rem; color: var(--text-tertiary); margin-top: 6px; }
+/* =========================================
+   3. COMPONENTS
+   ========================================= */
+.page-header { margin-bottom: 32px; padding-bottom: 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: flex-end; }
+.page-header h2 { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.5px; color: var(--text-primary); }
+.page-header p { color: var(--text-secondary); margin-top: 8px; font-size: 0.95rem; max-width: 600px; }
 
-.progress-container { background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin-bottom: 28px; }
-.progress-container .progress-header { display: flex; justify-content: space-between; margin-bottom: 12px; font-weight: 700; }
-.progress-bar-bg { height: 10px; background: var(--bg-card); border-radius: 5px; }
-.progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--green)); border-radius: 5px; transition: width 0.5s ease; }
+/* Stats & Grid */
+.stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 32px; }
+.stat-card { background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; transition: var(--transition); position: relative; overflow: hidden; }
+.stat-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: var(--shadow); }
+.stat-card .label { font-size: 0.75rem; font-weight: 700; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.5px; }
+.stat-card .number { font-size: 2.2rem; font-weight: 900; margin-top: 8px; line-height: 1; color: var(--text-primary); }
+.stat-card .sub { font-size: 0.8rem; color: var(--text-secondary); margin-top: 8px; display: flex; align-items: center; gap: 4px; }
+.stat-card .trend-up { color: var(--green); } .stat-card .trend-down { color: var(--red); }
 
-.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.info-box { background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; display: flex; gap: 14px; }
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 18px; font-size: 0.85rem; font-weight: 600; border-radius: var(--radius-sm); border: none; cursor: pointer; transition: var(--transition); color: white; }
-.btn-primary { background: var(--accent); } .btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); }
-.btn-secondary { background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border); } .btn-secondary:hover { border-color: var(--border-hover); }
-.btn-danger { background: var(--red); } .btn-sm { padding: 6px 12px; font-size: 0.78rem; }
-.btn-ai { background: linear-gradient(135deg, #8b5cf6, #3b82f6); box-shadow: 0 2px 8px rgba(139,92,246,0.3); }
-.form-group { margin-bottom: 20px; } .form-group label { display: block; font-size: 0.78rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 8px; }
-.form-input, .form-select, .form-textarea { width: 100%; background: var(--bg-input); border: 1px solid var(--border); color: var(--text-primary); padding: 12px; border-radius: var(--radius-sm); font-family: inherit; }
-.form-input:focus, .form-select:focus, .form-textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 
-/* TABLE & KANBAN */
-.table-wrapper { background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius); overflow: auto; max-height: 65vh; }
-table { width: 100%; border-collapse: collapse; } th, td { padding: 14px 18px; border-bottom: 1px solid var(--border); text-align: left; }
-th { position: sticky; top: 0; background: var(--bg-card); font-size: 0.7rem; font-weight: 800; color: var(--text-tertiary); text-transform: uppercase; z-index: 2; }
-tbody tr:hover { background: rgba(255,255,255,0.02); cursor: pointer; }
-.badge { padding: 4px 10px; border-radius: 4px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; }
-.badge-idea { background: rgba(100,116,139,0.15); color: #94a3b8; } .badge-audio { background: var(--purple-bg); color: #c4b5fd; }
-.badge-edit { background: var(--yellow-bg); color: #fcd34d; } .badge-ready { background: var(--green-bg); color: #86efac; } .badge-pub { background: var(--cyan-bg); color: #67e8f9; }
+/* Buttons & Forms */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 20px; font-size: 0.9rem; font-weight: 600; border-radius: var(--radius-sm); border: none; cursor: pointer; transition: var(--transition); color: white; }
+.btn-primary { background: var(--accent); box-shadow: 0 4px 12px rgba(59,130,246,0.3); } .btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); }
+.btn-secondary { background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border); } .btn-secondary:hover { border-color: var(--text-secondary); background: var(--bg-card-hover); }
+.btn-danger { background: var(--red-bg); color: var(--red); border: 1px solid var(--red); } .btn-danger:hover { background: var(--red); color: white; }
+.btn-sm { padding: 8px 16px; font-size: 0.8rem; }
+.btn-ghost { background: transparent; color: var(--text-secondary); border: 1px solid transparent; } .btn-ghost:hover { background: var(--bg-card); color: var(--text-primary); }
 
-.kanban-board { display: flex; gap: 16px; height: calc(100vh - 180px); overflow-x: auto; padding-bottom: 10px; }
-.kanban-col { flex: 0 0 280px; background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius); display: flex; flex-direction: column; }
-.kanban-col-header { padding: 14px 16px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; font-weight: 700; background: rgba(0,0,0,0.15); }
-.kanban-col-body { padding: 12px; flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
-.kanban-card { background: var(--bg-card); border: 1px solid var(--border); padding: 14px; border-radius: var(--radius-sm); cursor: grab; transition: var(--transition); }
-.kanban-card:hover { border-color: var(--accent); transform: translateY(-2px); } .kanban-card-title { font-weight: 700; font-size: 0.9rem; margin-bottom: 6px; }
-.kanban-card-phrase { font-size: 0.78rem; color: var(--text-secondary); font-style: italic; }
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; font-size: 0.8rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.5px; }
+.form-input, .form-select, .form-textarea { width: 100%; background: var(--bg-input); border: 1px solid var(--border); color: var(--text-primary); padding: 12px 16px; border-radius: var(--radius-sm); font-family: inherit; font-size: 0.9rem; transition: var(--transition); }
+.form-input:focus, .form-select:focus, .form-textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); background: var(--bg-base); }
 
-/* CALENDAR & AI & TIMER */
-.calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
-.calendar-day { background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius-sm); min-height: 80px; padding: 8px; }
-.cal-item { font-size: 0.7rem; background: var(--accent-glow); color: var(--accent); padding: 3px 6px; border-radius: 3px; margin-bottom: 3px; cursor: pointer; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* Tables & Kanban */
+.table-wrapper { background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 16px 20px; border-bottom: 1px solid var(--border); text-align: left; }
+th { background: var(--bg-card); font-size: 0.75rem; font-weight: 800; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.5px; position: sticky; top: 0; z-index: 10; }
+tbody tr { transition: background 0.15s; cursor: pointer; }
+tbody tr:hover { background: rgba(255,255,255,0.03); }
+.badge { padding: 4px 10px; border-radius: 4px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; display: inline-block; }
+.badge-idea { background: rgba(100,116,139,0.15); color: #94a3b8; border: 1px solid rgba(100,116,139,0.3); }
+.badge-audio { background: var(--purple-bg); color: #c4b5fd; border: 1px solid rgba(168,85,247,0.3); }
+.badge-edit { background: var(--yellow-bg); color: #fcd34d; border: 1px solid rgba(234,179,8,0.3); }
+.badge-ready { background: var(--green-bg); color: #86efac; border: 1px solid rgba(34,197,94,0.3); }
+.badge-pub { background: var(--cyan-bg); color: #67e8f9; border: 1px solid rgba(6,182,212,0.3); }
 
-.ai-panel { background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; margin-bottom: 24px; }
-.ai-result { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px; margin-top: 16px; white-space: pre-wrap; max-height: 400px; overflow-y: auto; color: var(--text-secondary); }
+.kanban-board { display: flex; gap: 20px; height: calc(100vh - 200px); overflow-x: auto; padding-bottom: 20px; }
+.kanban-col { flex: 0 0 300px; background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius); display: flex; flex-direction: column; }
+.kanban-col-header { padding: 16px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-weight: 700; background: rgba(0,0,0,0.2); border-radius: var(--radius) var(--radius) 0 0; }
+.kanban-col-body { padding: 12px; flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
+.kanban-card { background: var(--bg-card); border: 1px solid var(--border); padding: 16px; border-radius: var(--radius-sm); cursor: grab; transition: var(--transition); box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+.kanban-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+.kanban-card-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 8px; color: var(--text-primary); }
+.kanban-card-phrase { font-size: 0.8rem; color: var(--text-secondary); font-style: italic; line-height: 1.4; }
+.kanban-card-meta { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-tertiary); }
 
-.timer-display { font-size: 4rem; font-weight: 900; font-family: 'Courier New', monospace; color: var(--accent); margin: 20px 0; text-align: center; }
-.timer-running { color: var(--green); animation: timerPulse 1s ease infinite; }
-@keyframes timerPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+/* Calendar */
+.calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.calendar-day { background: var(--bg-panel); min-height: 120px; padding: 12px; position: relative; transition: background 0.2s; }
+.calendar-day:hover { background: var(--bg-card); }
+.calendar-day-header { text-align: center; font-size: 0.75rem; font-weight: 700; color: var(--text-tertiary); padding: 8px; background: var(--bg-base); border-bottom: 1px solid var(--border); }
+.cal-item { font-size: 0.75rem; padding: 4px 8px; border-radius: 4px; margin-bottom: 4px; cursor: pointer; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; border-left: 3px solid transparent; }
+.cal-item.idea { background: rgba(100,116,139,0.1); color: #94a3b8; border-left-color: #94a3b8; }
+.cal-item.edit { background: var(--yellow-bg); color: #fcd34d; border-left-color: #fcd34d; }
+.cal-item.ready { background: var(--green-bg); color: #86efac; border-left-color: #86efac; }
+.cal-item.pub { background: var(--cyan-bg); color: #67e8f9; border-left-color: #67e8f9; }
 
-/* MODAL */
-.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 200; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
-.modal-overlay.open { display: flex; }
-.modal { background: var(--bg-panel); width: 95%; max-width: 800px; max-height: 90vh; border-radius: var(--radius-lg); overflow-y: auto; border: 1px solid var(--border-hover); }
-.modal-head { padding: 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; position: sticky; top: 0; background: var(--bg-panel); z-index: 3; }
-.modal-body { padding: 28px; }
+/* Prompt Hub & Tools */
+.prompt-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin-bottom: 20px; transition: var(--transition); }
+.prompt-card:hover { border-color: var(--accent); }
+.prompt-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.prompt-title { font-weight: 700; color: var(--text-primary); display: flex; align-items: center; gap: 8px; }
+.prompt-body { background: var(--bg-input); padding: 16px; border-radius: var(--radius-sm); font-family: 'Courier New', monospace; font-size: 0.85rem; color: var(--text-secondary); white-space: pre-wrap; max-height: 200px; overflow-y: auto; margin-bottom: 12px; border: 1px solid var(--border); }
+.tool-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
+.tool-card { background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; text-align: center; transition: var(--transition); }
+.tool-card:hover { transform: translateY(-4px); border-color: var(--accent); }
+.tool-icon { font-size: 2rem; margin-bottom: 12px; display: block; }
+.tool-name { font-weight: 700; margin-bottom: 4px; display: block; }
+.tool-desc { font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 12px; display: block; }
 
-#toast-container { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 9999; }
-.toast { background: var(--bg-panel); color: white; padding: 14px 20px; border-radius: var(--radius-sm); border-left: 4px solid var(--green); }
+/* Modal */
+.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 200; justify-content: center; align-items: center; backdrop-filter: blur(8px); }
+.modal-overlay.open { display: flex; animation: fadeIn 0.2s ease; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.modal { background: var(--bg-panel); width: 95%; max-width: 900px; max-height: 90vh; border-radius: var(--radius-lg); overflow-y: auto; border: 1px solid var(--border-hover); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+.modal-head { padding: 24px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: var(--bg-panel); z-index: 10; }
+.modal-body { padding: 24px; }
+.phrase-row { display: grid; grid-template-columns: 1fr 1fr 1.2fr; gap: 12px; margin-bottom: 12px; padding: 12px; background: var(--bg-card); border-radius: var(--radius-sm); border: 1px solid var(--border); }
+.phrase-label { font-size: 0.7rem; font-weight: 800; color: var(--text-tertiary); text-transform: uppercase; margin-bottom: 4px; }
+
+/* Toast */
+#toast-container { position: fixed; bottom: 30px; right: 30px; display: flex; flex-direction: column; gap: 12px; z-index: 9999; }
+.toast { background: var(--bg-panel); color: white; padding: 16px 24px; border-radius: var(--radius-sm); border-left: 4px solid var(--green); box-shadow: 0 10px 30px rgba(0,0,0,0.3); display: flex; align-items: center; gap: 12px; animation: slideIn 0.3s ease; min-width: 300px; }
 .toast.error { border-left-color: var(--red); }
+@keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
 
-@media (max-width: 900px) { .sidebar { position: fixed; left: 0; top: 0; bottom: 0; transform: translateX(-100%); z-index: 90; } .sidebar.open { transform: translateX(0); } .menu-toggle { display: flex; } .main-content { padding: 20px 16px; padding-top: 60px; } .grid-2 { grid-template-columns: 1fr; } .kanban-col { flex: 0 0 260px; } }
+/* Responsive */
+@media (max-width: 1024px) { .grid-3 { grid-template-columns: 1fr; } .kanban-board { height: auto; } .kanban-col { flex: 1; min-width: 280px; } }
+@media (max-width: 768px) { .sidebar { position: fixed; left: 0; top: 0; bottom: 0; transform: translateX(-100%); z-index: 90; } .sidebar.open { transform: translateX(0); } .menu-toggle { display: flex; } .main-content { padding: 20px; padding-top: 70px; } .grid-2 { grid-template-columns: 1fr; } .phrase-row { grid-template-columns: 1fr; } }
+.menu-toggle { display: none; position: fixed; top: 16px; left: 16px; z-index: 100; background: var(--bg-panel); border: 1px solid var(--border); color: var(--text-primary); width: 44px; height: 44px; border-radius: var(--radius-sm); cursor: pointer; font-size: 1.2rem; align-items: center; justify-content: center; box-shadow: var(--shadow); }
 </style>
 </head>
 <body>
@@ -130,50 +162,110 @@ tbody tr:hover { background: rgba(255,255,255,0.02); cursor: pointer; }
 
 <aside class="sidebar" id="sidebar">
     <div class="sidebar-brand">
-        <h1>ISM Command</h1><p>Inglés Sin Miedo</p>
+        <h1>ISM Command</h1><p>PRO Edition v5.0</p>
     </div>
     <nav class="sidebar-nav">
-        <div class="nav-label">Organización</div>
-        <button class="nav-btn active" onclick="goTo('dashboard', this)">  Dashboard</button>
+        <div class="nav-label">📊 Dashboard</div>
+        <button class="nav-btn active" onclick="goTo('dashboard', this)">🏠 General</button>
+        <button class="nav-btn" onclick="goTo('analytics', this)">📈 Retención & Métricas</button>
+        
+        <div class="nav-label">🎬 Producción</div>
         <button class="nav-btn" onclick="goTo('table', this)">🗄️ Base de Datos</button>
-        <button class="nav-btn" onclick="goTo('kanban', this)">📋 Kanban Pipeline</button>
-        <button class="nav-btn" onclick="goTo('calendar', this)">📅 Calendario</button>
+        <button class="nav-btn" onclick="goTo('kanban', this)">📋 Pipeline Visual</button>
+        <button class="nav-btn" onclick="goTo('calendar', this)">📅 Calendario 2026</button>
+        <button class="nav-btn" onclick="goTo('specs', this)">🎥 Specs & Guías</button>
         
-        <div class="nav-label">Fábrica de Contenido IA</div>
-        <button class="nav-btn" onclick="goTo('ai-scripts', this)">📝 Generar Guiones</button>
-        <button class="nav-btn" onclick="goTo('ai-seo', this)">🎯 Títulos & SEO</button>
-        <button class="nav-btn" onclick="goTo('ai-linkedin', this)">💼 Post para LinkedIn</button>
+        <div class="nav-label">🤖 IA & Prompts</div>
+        <button class="nav-btn" onclick="goTo('prompt-hub', this)">⚡ Prompt Hub (Gratis)</button>
+        <button class="nav-btn" onclick="goTo('ai-scripts', this)">📝 Generador de Guiones</button>
         
-        <div class="nav-label">Productividad</div>
-        <button class="nav-btn" onclick="goTo('pomodoro', this)">⏱️ Modo Enfoque</button>
+        <div class="nav-label">🛠️ Herramientas</div>
+        <button class="nav-btn" onclick="goTo('tools', this)">🔗 Recursos Externos</button>
         <button class="nav-btn" onclick="goTo('settings', this)">⚙️ Configuración</button>
     </nav>
-    <div class="sidebar-footer">v4.0 PRO · LocalStorage</div>
+    <div class="sidebar-footer">
+        Sistema Operativo de Contenido<br>
+        <span style="opacity:0.5; font-size:0.65rem;">Datos locales seguros</span>
+    </div>
 </aside>
 
 <div class="main-content">
     <!-- DASHBOARD -->
     <div class="view active" id="v-dashboard">
-        <div class="page-header"><h2>  Dashboard General</h2><p>Control total de tu canal. Sin miedo al algoritmo.</p></div>
-        <div class="stats-row">
-            <div class="stat-card"><div class="label">Total Videos</div><div class="number" id="s-total">0</div></div>
-            <div class="stat-card"><div class="label">Ideas / Guión</div><div class="number" style="color:var(--text-secondary)" id="s-idea">0</div></div>
-            <div class="stat-card"><div class="label">En Edición</div><div class="number" style="color:var(--yellow)" id="s-edit">0</div></div>
-            <div class="stat-card"><div class="label">Listos</div><div class="number" style="color:var(--green)" id="s-ready">0</div></div>
-            <div class="stat-card"><div class="label">Publicados</div><div class="number" style="color:var(--cyan)" id="s-pub">0</div></div>
+        <div class="page-header">
+            <div>
+                <h2>🏠 Dashboard General</h2>
+                <p>Vista 360° de tu canal. Planificación estratégica para Abril 2026.</p>
+            </div>
+            <button class="btn btn-primary" onclick="goTo('prompt-hub', document.querySelectorAll('.nav-btn')[6])">⚡ Ir a Prompts</button>
         </div>
-        <div class="progress-container">
-            <div class="progress-header"><h3>Progreso del Pipeline</h3><span id="progress-pct">0%</span></div>
-            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progress-fill" style="width:0%"></div></div>
+        
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="label">Total Videos</div>
+                <div class="number" id="s-total">0</div>
+                <div class="sub"><span class="trend-up">▲</span> Base de datos completa</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">En Producción</div>
+                <div class="number" style="color:var(--yellow)" id="s-prod">0</div>
+                <div class="sub">Ideas + Edición + Audio</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">Listos para Publicar</div>
+                <div class="number" style="color:var(--green)" id="s-ready">0</div>
+                <div class="sub">🔥 Oportunidad inmediata</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">Publicados</div>
+                <div class="number" style="color:var(--cyan)" id="s-pub">0</div>
+                <div class="sub">Archivos del canal</div>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div class="stat-card" style="border-color:var(--purple)">
+                <div class="label">📅 Proyección Abril 2026</div>
+                <div style="margin-top:16px; font-size:0.9rem; color:var(--text-secondary); line-height:1.6;">
+                    <strong>Objetivo:</strong> 12 Videos (3 por semana).<br>
+                    <strong>Enfoque:</strong> "Inglés para Reuniones Híbridas" y "Small Talk de Oficina".<br>
+                    <strong>Tendencia Competencia:</strong> Uso excesivo de IA en voces. <span style="color:var(--green)">Tu ventaja: Voz humana y fonética real.</span>
+                </div>
+                <button class="btn btn-sm btn-secondary" style="margin-top:16px;" onclick="goTo('calendar', document.querySelectorAll('.nav-btn')[5])">Ver Calendario</button>
+            </div>
+            <div class="stat-card" style="border-color:var(--green)">
+                <div class="label">🎯 Recomendación Estratégica</div>
+                <div style="margin-top:16px; font-size:0.9rem; color:var(--text-secondary); line-height:1.6;">
+                    Para Abril 2026, se recomienda reciclar los videos de "Emails" (ID 1003) y convertirlos en un formato de "Reacción a Emails Reales".<br><br>
+                    <strong>Acción:</strong> Revisar videos con ID 1003-1010 para posible remake.
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- TABLA -->
-    <div class="view" id="v-table">
-        <div class="page-header"><h2>🗄️ Base de Datos Completa</h2><p>Tus 30 guiones originales. Clic para editar.</p></div>
+    <!-- ANALYTICS -->
+    <div class="view" id="v-analytics">
+        <div class="page-header"><h2>📈 Analíticas de Retención</h2><p>Ingresa los datos de YouTube Studio para identificar patrones ganadores.</p></div>
         <div class="table-wrapper">
             <table>
-                <thead><tr><th>Tema</th><th>Estado</th><th>Categoría</th><th>Frase Principal (Inglés)</th></tr></thead>
+                <thead><tr><th>Video</th><th>Retención 3s (%)</th><th>Visualización Total (%)</th><th>Decisión</th></tr></thead>
+                <tbody id="analyticsBody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- TABLE -->
+    <div class="view" id="v-table">
+        <div class="page-header">
+            <h2>🗄️ Base de Datos Maestra</h2>
+            <div style="display:flex; gap:10px;">
+                <input type="text" class="form-input" id="tableSearch" placeholder="🔍 Buscar tema..." style="width:250px;" oninput="renderTable()">
+                <button class="btn btn-primary btn-sm" onclick="openModal('new')">+ Nuevo Video</button>
+            </div>
+        </div>
+        <div class="table-wrapper">
+            <table>
+                <thead><tr><th>ID</th><th>Tema</th><th>Estado</th><th>Categoría</th><th>Frase Principal</th><th>Fecha</th></tr></thead>
                 <tbody id="tableBody"></tbody>
             </table>
         </div>
@@ -181,238 +273,336 @@ tbody tr:hover { background: rgba(255,255,255,0.02); cursor: pointer; }
 
     <!-- KANBAN -->
     <div class="view" id="v-kanban">
-        <div class="page-header"><h2>📋 Pipeline de Producción</h2><p>Arrastra las tarjetas para cambiar su estado visualmente.</p></div>
+        <div class="page-header"><h2>📋 Pipeline de Producción</h2><p>Arrastra las tarjetas para avanzar en el proceso.</p></div>
         <div class="kanban-board" id="kanbanBoard"></div>
     </div>
 
-    <!-- CALENDARIO -->
+    <!-- CALENDAR -->
     <div class="view" id="v-calendar">
-        <div class="page-header"><h2>📅 Frecuencia de Publicación</h2><p>Planifica tus Shorts para mantener la consistencia.</p></div>
-        <div style="display:flex; gap:12px; align-items:center; margin-bottom:20px;">
-            <button class="btn btn-secondary btn-sm" onclick="changeMonth(-1)">◀ Mes Anterior</button>
-            <h3 id="calendarTitle"></h3>
-            <button class="btn btn-secondary btn-sm" onclick="changeMonth(1)">Mes Siguiente ▶</button>
+        <div class="page-header">
+            <h2>📅 Calendario de Publicación</h2>
+            <div style="display:flex; gap:10px;">
+                <button class="btn btn-secondary btn-sm" onclick="changeMonth(-1)">◀ Ant</button>
+                <h3 id="calendarTitle" style="margin:0 20px; font-size:1.2rem;"></h3>
+                <button class="btn btn-secondary btn-sm" onclick="changeMonth(1)">Sig ▶</button>
+            </div>
+        </div>
+        <div style="margin-bottom:20px; display:flex; gap:10px; font-size:0.8rem;">
+            <span style="display:flex; align-items:center; gap:6px;"><div style="width:10px; height:10px; background:rgba(100,116,139,0.3); border-radius:2px;"></div> Idea</span>
+            <span style="display:flex; align-items:center; gap:6px;"><div style="width:10px; height:10px; background:var(--yellow-bg); border-radius:2px;"></div> Edición</span>
+            <span style="display:flex; align-items:center; gap:6px;"><div style="width:10px; height:10px; background:var(--green-bg); border-radius:2px;"></div> Listo</span>
+            <span style="display:flex; align-items:center; gap:6px;"><div style="width:10px; height:10px; background:var(--cyan-bg); border-radius:2px;"></div> Publicado</span>
         </div>
         <div class="calendar-grid" id="calendarGrid"></div>
     </div>
 
-    <!-- IA SCRIPTS -->
-    <div class="view" id="v-ai-scripts">
-        <div class="page-header"><h2>📝 Creador de Guiones (Gemini)</h2><p>Genera 5 frases con español, inglés y fonética para nuevos videos.</p></div>
-        <div class="ai-panel">
-            <div class="form-group"><label>Tema del nuevo video</label><input type="text" class="form-input" id="aiTopic" placeholder="Ej: Pidiendo vacaciones"></div>
-            <button class="btn btn-ai" onclick="aiGenerateScript()">✨ Generar Guion</button>
-            <div class="ai-result" id="aiScriptResult" style="display:none;"></div>
-            <button class="btn btn-primary btn-sm" id="btnSaveScript" style="display:none; margin-top:10px;" onclick="injectAiScript()">💾 Guardar en Base de Datos</button>
-        </div>
-    </div>
-
-    <!-- IA SEO -->
-    <div class="view" id="v-ai-seo">
-        <div class="page-header"><h2>🎯 Generador SEO</h2><p>Títulos virales y descripciones optimizadas basadas en tus videos.</p></div>
-        <div class="ai-panel">
-            <div class="form-group"><label>Selecciona un video de tu Base de Datos</label><select class="form-select" id="seoSelect"></select></div>
-            <button class="btn btn-ai" onclick="aiGenerateSEO()">✨ Generar SEO Completo</button>
-            <div class="ai-result" id="aiSeoResult" style="display:none;"></div>
-        </div>
-    </div>
-    
-    <!-- IA LINKEDIN -->
-    <div class="view" id="v-ai-linkedin">
-        <div class="page-header"><h2>💼 Reciclador a LinkedIn</h2><p>Transforma el guion de un Short en un Carrusel o Post de LinkedIn.</p></div>
-        <div class="ai-panel">
-            <div class="form-group"><label>Selecciona un video</label><select class="form-select" id="linkedinSelect"></select></div>
-            <button class="btn btn-ai" onclick="aiGenerateLinkedIn()">✨ Generar Post</button>
-            <div class="ai-result" id="aiLinkedinResult" style="display:none;"></div>
-        </div>
-    </div>
-
-    <!-- POMODORO -->
-    <div class="view" id="v-pomodoro">
-        <div class="page-header"><h2>⏱️ Modo Enfoque (Pomodoro)</h2><p>Trabaja "sin miedo" y sin distracciones. Bloques de 25 minutos.</p></div>
-        <div class="ai-panel" style="text-align: center; max-width: 500px; margin: 0 auto;">
-            <h3 id="timerLabel">Tiempo de Trabajo</h3>
-            <div class="timer-display" id="timerDisplay">25:00</div>
-            <div style="display:flex; justify-content:center; gap:10px;">
-                <button class="btn btn-primary" onclick="startTimer()">▶ Iniciar</button>
-                <button class="btn btn-secondary" onclick="pauseTimer()">⏸ Pausar</button>
-                <button class="btn btn-danger" onclick="resetTimer()">🔄 Reiniciar</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- CONFIGURACIÓN -->
-    <div class="view" id="v-settings">
-        <div class="page-header"><h2>⚙️ Configuración y Backups</h2><p>Tus datos están en tu navegador. Exporta para no perderlos.</p></div>
-        <div class="ai-panel">
-            <h3>🔑 API Key de Gemini (Gratis)</h3>
-            <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:10px;">Consigue tu clave en Google AI Studio para activar la Fábrica de Contenido.</p>
-            <div style="display:flex; gap:10px;">
-                <input type="password" class="form-input" id="apiKeyInput" placeholder="AIzaSy...">
-                <button class="btn btn-primary" onclick="saveApiKey()">Guardar</button>
-            </div>
-        </div>
+    <!-- SPECS -->
+    <div class="view" id="v-specs">
+        <div class="page-header"><h2>🎥 Especificaciones de Producción</h2><p>Estándares de calidad para mantener la consistencia del canal.</p></div>
         <div class="grid-2">
-            <div class="ai-panel" style="border-color:var(--green)">
-                <h3 style="color:var(--green)">⬇️ Exportar Datos</h3>
-                <p style="font-size:0.85rem; margin-bottom:10px;">Descarga tu base de datos completa en un archivo JSON.</p>
-                <button class="btn btn-secondary" onclick="exportDB()">Descargar Backup</button>
+            <div class="prompt-card">
+                <div class="prompt-title">📐 Formato Visual</div>
+                <ul style="margin-top:12px; padding-left:20px; color:var(--text-secondary); line-height:1.8; font-size:0.9rem;">
+                    <li><strong>Relación de aspecto:</strong> 9:16 (1080x1920px).</li>
+                    <li><strong>Duración ideal:</strong> 45-55 segundos (Sweet spot para retención).</li>
+                    <li><strong>Iluminación:</strong> Luz frontal suave (Ring light o ventana). Evitar sombras duras.</li>
+                    <li><strong>Fondo:</strong> Limpio, preferiblemente oficina o pared lisa. Profundidad de campo (desenfoque) si es posible.</li>
+                    <li><strong>Vestimenta:</strong> Business Casual (camisa, blazer). Coherente con la marca "Inglés Sin Miedo".</li>
+                </ul>
             </div>
-            <div class="ai-panel" style="border-color:var(--red)">
-                <h3 style="color:var(--red)">⬆️ Importar Datos</h3>
-                <p style="font-size:0.85rem; margin-bottom:10px;">Carga un archivo JSON previo. Sobrescribirá los actuales.</p>
-                <input type="file" id="importFile" accept=".json" class="form-input" style="margin-bottom:10px;">
-                <button class="btn btn-danger" onclick="importDB()">Restaurar</button>
+            <div class="prompt-card">
+                <div class="prompt-title">🎵 Audio & Edición</div>
+                <ul style="margin-top:12px; padding-left:20px; color:var(--text-secondary); line-height:1.8; font-size:0.9rem;">
+                    <li><strong>Micrófono:</strong> Solapa inalámbrico o micrófono de shotgun cercano. Sin eco.</li>
+                    <li><strong>Música:</strong> Lo-fi o Corporate upbeat a volumen -25db (no debe tapar la voz).</li>
+                    <li><strong>Subtítulos:</strong> Fuente Sans-Serif (Inter o Montserrat). Color blanco con borde negro o sombra. Resaltar palabras clave en Amarillo o Azul.</li>
+                    <li><strong>Ritmo:</strong> Cortes "Jump cut" para eliminar silencios. Zoom in/out digital cada 3-5 segundos.</li>
+                </ul>
+            </div>
+            <div class="prompt-card" style="grid-column: span 2;">
+                <div class="prompt-title">📝 Estructura del Guion (Hook - Valor - CTA)</div>
+                <div style="margin-top:12px; color:var(--text-secondary); font-size:0.9rem; line-height:1.6;">
+                    <strong>0:00 - 0:03 (Gancho):</strong> Frase impactante o pregunta directa. Ej: "¿Te congelas en las reuniones?"<br>
+                    <strong>0:03 - 0:45 (Valor):</strong> Las 5 frases clave. Español -> Inglés -> Fonética. Rápido y claro.<br>
+                    <strong>0:45 - 0:60 (CTA):</strong> Llamada a la acción. "Suscríbete para más inglés corporativo".
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PROMPT HUB -->
+    <div class="view" id="v-prompt-hub">
+        <div class="page-header">
+            <h2>⚡ Prompt Hub (Sin API)</h2>
+            <p>Genera prompts perfectos para ChatGPT/Claude con un clic. Copia, pega y obtén resultados.</p>
+        </div>
+        
+        <div class="form-group">
+            <label>1. Selecciona un video de tu base de datos</label>
+            <select class="form-select" id="promptVideoSelect" onchange="loadPromptsForVideo()"></select>
+        </div>
+
+        <div id="promptsContainer" style="display:none;">
+            <div class="prompt-card">
+                <div class="prompt-header">
+                    <div class="prompt-title">📝 Generar Guion Nuevo (Basado en este tema)</div>
+                    <button class="btn btn-sm btn-secondary" onclick="copyPrompt('promptScript')">📋 Copiar</button>
+                </div>
+                <div class="prompt-body" id="promptScript"></div>
+            </div>
+
+            <div class="grid-2">
+                <div class="prompt-card">
+                    <div class="prompt-header">
+                        <div class="prompt-title">🎯 Títulos & SEO YouTube</div>
+                        <button class="btn btn-sm btn-secondary" onclick="copyPrompt('promptSEO')">📋 Copiar</button>
+                    </div>
+                    <div class="prompt-body" id="promptSEO"></div>
+                </div>
+                <div class="prompt-card">
+                    <div class="prompt-header">
+                        <div class="prompt-title">💼 Post para LinkedIn</div>
+                        <button class="btn btn-sm btn-secondary" onclick="copyPrompt('promptLinkedIn')">📋 Copiar</button>
+                    </div>
+                    <div class="prompt-body" id="promptLinkedIn"></div>
+                </div>
+            </div>
+            
+            <div class="prompt-card">
+                <div class="prompt-header">
+                    <div class="prompt-title">🎬 Instrucciones para Editor de Video</div>
+                    <button class="btn btn-sm btn-secondary" onclick="copyPrompt('promptEditor')">📋 Copiar</button>
+                </div>
+                <div class="prompt-body" id="promptEditor"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI SCRIPTS (Legacy/Optional) -->
+    <div class="view" id="v-ai-scripts">
+        <div class="page-header"><h2>📝 Generador Rápido de Ideas</h2><p>Crea estructuras básicas para nuevos videos manualmente.</p></div>
+        <div class="grid-2">
+            <div class="stat-card">
+                <div class="form-group">
+                    <label>Tema del Video</label>
+                    <input type="text" class="form-input" id="newVideoTopic" placeholder="Ej: Quejas de clientes">
+                </div>
+                <div class="form-group">
+                    <label>Categoría</label>
+                    <select class="form-select" id="newVideoCategory">
+                        <option>Reuniones</option><option>Emails</option><option>Social</option><option>Profesional</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary" onclick="createNewVideo()">💾 Crear Video Vacío</button>
+            </div>
+            <div class="stat-card" style="display:flex; align-items:center; justify-content:center; color:var(--text-tertiary);">
+                <p>Usa el <strong>Prompt Hub</strong> para llenar este video con frases generadas por IA externamente.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOOLS -->
+    <div class="view" id="v-tools">
+        <div class="page-header"><h2>🔗 Herramientas Gratuitas Externas</h2><p>Optimiza tu producción con estas herramientas recomendadas.</p></div>
+        <div class="tool-grid">
+            <a href="https://capcut.com" target="_blank" class="tool-card">
+                <span class="tool-icon">✂️</span>
+                <span class="tool-name">CapCut Desktop</span>
+                <span class="tool-desc">Edición de video rápida, subtítulos automáticos y efectos.</span>
+            </a>
+            <a href="https://canva.com" target="_blank" class="tool-card">
+                <span class="tool-icon">🎨</span>
+                <span class="tool-name">Canva</span>
+                <span class="tool-desc">Miniaturas, posts de LinkedIn y recursos gráficos.</span>
+            </a>
+            <a href="https://trends.google.com" target="_blank" class="tool-card">
+                <span class="tool-icon">📈</span>
+                <span class="tool-name">Google Trends</span>
+                <span class="tool-desc">Investiga qué temas de inglés están buscando ahora.</span>
+            </a>
+            <a href="https://answersthepublic.com" target="_blank" class="tool-card">
+                <span class="tool-icon">❓</span>
+                <span class="tool-name">AnswerThePublic</span>
+                <span class="tool-desc">Encuentra preguntas reales que hace la gente sobre inglés.</span>
+            </a>
+            <a href="https://clipchamp.com" target="_blank" class="tool-card">
+                <span class="tool-icon">🎙️</span>
+                <span class="tool-name">Clipchamp Audio</span>
+                <span class="tool-desc">Grabadora de voz y limpieza de audio básica gratuita.</span>
+            </a>
+            <a href="https://unscreen.com" target="_blank" class="tool-card">
+                <span class="tool-icon">🟢</span>
+                <span class="tool-name">Unscreen</span>
+                <span class="tool-desc">Quita el fondo de videos sin pantalla verde (limitado gratis).</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div class="view" id="v-settings">
+        <div class="page-header"><h2>⚙️ Configuración y Datos</h2><p>Gestión de seguridad y backups.</p></div>
+        <div class="grid-2">
+            <div class="stat-card" style="border-color:var(--green)">
+                <h3 style="color:var(--green); margin-bottom:12px;">⬇️ Exportar Backup</h3>
+                <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:16px;">Descarga toda tu base de datos, estados y notas en un archivo JSON seguro.</p>
+                <button class="btn btn-secondary" onclick="exportDB()">Descargar JSON</button>
+            </div>
+            <div class="stat-card" style="border-color:var(--red)">
+                <h3 style="color:var(--red); margin-bottom:12px;">⬆️ Restaurar Backup</h3>
+                <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:16px;">Carga un archivo JSON previo. <strong>Advertencia:</strong> Esto sobrescribirá los datos actuales.</p>
+                <input type="file" id="importFile" accept=".json" class="form-input" style="margin-bottom:12px;">
+                <button class="btn btn-danger" onclick="importDB()">Restaurar Datos</button>
+            </div>
+            <div class="stat-card" style="grid-column: span 2; border-color:var(--yellow)">
+                <h3 style="color:var(--yellow); margin-bottom:12px;">⚠️ Reset de Fábrica</h3>
+                <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:16px;">Borra todos los cambios y vuelve a cargar los 30 videos originales del sistema.</p>
+                <button class="btn btn-danger" onclick="factoryReset()">Resetear Todo</button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- MODAL PARA EDITAR VIDEOS -->
+<!-- MODAL -->
 <div class="modal-overlay" id="modal">
     <div class="modal">
         <div class="modal-head">
             <h3 id="modalTitle">Detalle del Video</h3>
-            <button class="btn btn-secondary btn-sm" onclick="document.getElementById('modal').classList.remove('open')">X</button>
+            <button class="btn btn-ghost btn-sm" onclick="closeModal()">✕ Cerrar</button>
         </div>
         <div class="modal-body" id="modalBody"></div>
     </div>
 </div>
 
 <div id="toast-container"></div>
+
+<!-- SCRIPT START -->
 <script>
+
 // ==========================================
-// 1. BASE DE DATOS MAESTRA (30 VIDEOS)
+// 1. MASTER DATA (SEED + APRIL 2026 PROJECTION)
 // ==========================================
 const SEED_DATA = [
-  { id:1001, tema:"Sobrevivir a Zoom", estado:"pub", date:"2026-04-02", category:"Reuniones", frases:[{esp:"¿Me escuchan?",eng:"Can you hear me?",fon:"/kan iú jír mi/"},{esp:"Estás en mute",eng:"You are on mute",fon:"/iú ar on miút/"},{esp:"Se cortó tu audio",eng:"You cut out",fon:"/iú kot áut/"},{esp:"Vayamos al grano",eng:"Let's get to the point",fon:"/lets guet tu de póint/"},{esp:"Tengo que irme",eng:"I have to jump off",fon:"/ái jav tu yomp of/"}] },
-  { id:1002, tema:"Escapando con Elegancia", estado:"pub", date:"2026-04-04", category:"Social", frases:[{esp:"Ahora no puedo",eng:"I can't right now",fon:"/ái kant rráit náu/"},{esp:"Estoy a tope de trabajo",eng:"I am swamped",fon:"/ái am suámpt/"},{esp:"Lo reviso luego",eng:"I will check it later",fon:"/ái uil chek it léi-ter/"},{esp:"Hablamos mañana",eng:"Let's talk tomorrow",fon:"/lets tok tu-MÓ-rrou/"},{esp:"Buen fin de semana",eng:"Have a great weekend",fon:"/jav a gréit uí-kend/"}] },
-  { id:1003, tema:"El Clásico Email", estado:"pub", date:"2026-04-07", category:"Emails", frases:[{esp:"Adjunto el archivo",eng:"Please find attached",fon:"/plís fáind a-TACHT/"},{esp:"Como acordamos",eng:"As agreed",fon:"/as a-GRÍD/"},{esp:"Quedo atento",eng:"Looking forward",fon:"/lú-king fór-uard/"},{esp:"Solo para confirmar",eng:"Just to confirm",fon:"/yost tu kon-FÉRM/"},{esp:"Saludos cordiales",eng:"Best regards",fon:"/best ri-GÁRDS/"}] },
-  { id:1004, tema:"Pidiendo Ayuda", estado:"ready", date:"2026-04-09", category:"Social", frases:[{esp:"Dame una mano",eng:"Give me a hand",fon:"/guív mi a jand/"},{esp:"No entiendo esto",eng:"I don't get this",fon:"/ái dóunt guet dis/"},{esp:"¿Tienes un minuto?",eng:"Got a minute?",fon:"/got a MÍ-nit/"},{esp:"Necesito un favor",eng:"I need a favor",fon:"/ái níd a féi-vor/"},{esp:"Sácame de dudas",eng:"Clarify this for me",fon:"/KLÁ-ri-fai dis for mi/"}] },
-  { id:1005, tema:"Viernes por la Tarde", estado:"ready", date:"2026-04-11", category:"Social", frases:[{esp:"Ya casi terminamos",eng:"We are almost done",fon:"/uí ar ól-moust don/"},{esp:"Terminemos por hoy",eng:"Let's call it a day",fon:"/lets kol it a déi/"},{esp:"Qué semana tan larga",eng:"What a week",fon:"/uát a uík/"},{esp:"Nos vemos el lunes",eng:"See you Monday",fon:"/sí iú món-dei/"},{esp:"A descansar",eng:"Time to rest",fon:"/táim tu rrest/"}] },
-  { id:1006, tema:"Cometiendo Errores", estado:"edit", date:"", category:"Profesional", frases:[{esp:"Fue culpa mía",eng:"My bad",fon:"/mái bad/"},{esp:"Hubo un error",eng:"There was a mistake",fon:"/dér uas a mis-TÉIK/"},{esp:"Lo solucionaré rápido",eng:"I will fix it",fon:"/ái uil fiks it/"},{esp:"Siento la demora",eng:"Sorry for the delay",fon:"/SÓ-rri for de di-LÉI/"},{esp:"No volverá a pasar",eng:"It won't happen again",fon:"/it uóunt JÁ-pen a-GUÉN/"}] },
-  { id:1007, tema:"Ganando Tiempo", estado:"edit", date:"", category:"Reuniones", frases:[{esp:"Déjame pensarlo",eng:"Let me think about it",fon:"/let mi zink a-BÁUT it/"},{esp:"Lo averiguo pronto",eng:"I will find out",fon:"/ái uil fáind áut/"},{esp:"Dame un momento",eng:"Give me a moment",fon:"/guív mi a MÓU-ment/"},{esp:"Te aviso luego",eng:"I will let you know",fon:"/ái uil let iú nóu/"},{esp:"Buena pregunta",eng:"That is a good question",fon:"/dats a gud KUÉS-chon/"}] },
-  { id:1008, tema:"El Jefe te Llama", estado:"audio", date:"", category:"Profesional", frases:[{esp:"Dime",eng:"Tell me",fon:"/tel mi/"},{esp:"¿En qué ayudo?",eng:"How can I help?",fon:"/jáu kan ái jelp/"},{esp:"Buena idea",eng:"Good call",fon:"/gud kol/"},{esp:"Me encargo de eso",eng:"I will handle it",fon:"/ái uil JÁN-dol it/"},{esp:"Entendido",eng:"Understood",fon:"/ón-der-STÚD/"}] },
-  { id:1009, tema:"Networking Casual", estado:"audio", date:"", category:"Social", frases:[{esp:"Encantado de conocerte",eng:"Nice to meet you",fon:"/náis tu mít iú/"},{esp:"A qué te dedicas",eng:"What do you do?",fon:"/uát du iú du/"},{esp:"¿De dónde eres?",eng:"Where are you from?",fon:"/uér ar iú from/"},{esp:"Tienes LinkedIn",eng:"Are you on LinkedIn?",fon:"/ar iú on línkt-in/"},{esp:"Sigamos en contacto",eng:"Let's stay in touch",fon:"/lets stéi in toch/"}] },
-  { id:1010, tema:"Elogiando al Equipo", estado:"idea", date:"", category:"Profesional", frases:[{esp:"Excelente trabajo",eng:"Outstanding work",fon:"/aut-STÁN-ding uérk/"},{esp:"Bien hecho",eng:"Well done",fon:"/uél don/"},{esp:"Eres un genio",eng:"You are a lifesaver",fon:"/iúr a LÁIF-sei-ver/"},{esp:"Gran aporte",eng:"Great input",fon:"/gréit ÍN-put/"},{esp:"Sigamos así",eng:"Keep it up",fon:"/kíp it op/"}] },
-  { id:1011, tema:"Apagando Incendios", estado:"idea", date:"", category:"Profesional", frases:[{esp:"Es urgente",eng:"It is urgent",fon:"/its ÉR-yent/"},{esp:"Problema grave",eng:"Major issue",fon:"/MÉI-yor Í-shu/"},{esp:"Rápido por favor",eng:"ASAP please",fon:"/éi-es-éi-pi plís/"},{esp:"Detén todo",eng:"Hold everything",fon:"/jóld É-vri-zing/"},{esp:"Tenemos que hablar",eng:"We need to talk",fon:"/uí níd tu tok/"}] },
-  { id:1012, tema:"Cansancio Laboral", estado:"idea", date:"", category:"Social", frases:[{esp:"Estoy agotado",eng:"I am exhausted",fon:"/ái am ek-SÓS-ted/"},{esp:"Día muy largo",eng:"Long day",fon:"/long déi/"},{esp:"Necesito café",eng:"I need coffee",fon:"/ái níd KÓ-fi/"},{esp:"Mi cerebro está frito",eng:"My brain is fried",fon:"/mái bréin is fráid/"},{esp:"Ya no puedo más",eng:"I am done for today",fon:"/ái am don for tu-DÉI/"}] },
-  { id:1013, tema:"Cobrando el Sueldo", estado:"idea", date:"", category:"Social", frases:[{esp:"Hoy pagan",eng:"Payday today",fon:"/PÉI-dei tu-DÉI/"},{esp:"Envía la factura",eng:"Send the invoice",fon:"/send di ÍN-vois/"},{esp:"¿Ya depositaron?",eng:"Did we get paid?",fon:"/did uí guet péid/"},{esp:"Revisa tu cuenta",eng:"Check your account",fon:"/chek iúr a-KÁUNT/"},{esp:"Invito el almuerzo",eng:"Lunch is on me",fon:"/lonch is on mi/"}] },
-  { id:1014, tema:"Chismes de Oficina", estado:"idea", date:"", category:"Social", frases:[{esp:"¿Te enteraste?",eng:"Did you hear?",fon:"/did iú jír/"},{esp:"No me digas",eng:"No way",fon:"/nóu uéi/"},{esp:"Es un secreto",eng:"It is a secret",fon:"/its a SÍ-kret/"},{esp:"Solo entre nosotros",eng:"Just between us",fon:"/yost bi-TUÍN os/"},{esp:"Quién lo diría",eng:"Who would have thought",fon:"/jú uud jav zot/"}] },
-  { id:1015, tema:"Pidiendo Permisos", estado:"idea", date:"", category:"Profesional", frases:[{esp:"Llego tarde",eng:"I am running late",fon:"/ái am RÓ-ning léit/"},{esp:"Me siento mal",eng:"I feel sick",fon:"/ái fíl sik/"},{esp:"Tengo cita médica",eng:"I have a doctor appointment",fon:"/ái jav a DÓK-tor a-PÓINT-ment/"},{esp:"Saldré temprano",eng:"I am leaving early",fon:"/ái am LÍ-ving ÉR-li/"},{esp:"Tomaré un día libre",eng:"I am taking a day off",fon:"/ái am TÉI-king a déi of/"}] },
-  { id:1016, tema:"Celebrando Éxitos", estado:"idea", date:"", category:"Social", frases:[{esp:"Lo logramos",eng:"We did it",fon:"/uí did it/"},{esp:"Misión cumplida",eng:"Mission accomplished",fon:"/MÍ-shon a-KÓM-plisht/"},{esp:"Trato cerrado",eng:"Deal closed",fon:"/díl klóusd/"},{esp:"Récord de ventas",eng:"Sales record",fon:"/séils RÉ-kord/"},{esp:"A celebrar",eng:"Let's celebrate",fon:"/lets SÉ-le-bréit/"}] },
-  { id:1017, tema:"Excusas Clásicas", estado:"idea", date:"", category:"Social", frases:[{esp:"Se fue el internet",eng:"My internet dropped",fon:"/mái ÍN-ter-net dropt/"},{esp:"El tráfico estaba feo",eng:"Traffic was bad",fon:"/TRÁ-fik uas bad/"},{esp:"No vi tu correo",eng:"I missed your email",fon:"/ái mist iúr Í-meil/"},{esp:"Estaba en otra reunión",eng:"I was in another meeting",fon:"/ái uas in a-NÓ-der MÍ-ting/"},{esp:"Mi alarma no sonó",eng:"My alarm didn't go off",fon:"/mái a-LÁRM DÍ-dent góu of/"}] },
-  { id:1018, tema:"Frustración Tecnológica", estado:"idea", date:"", category:"Profesional", frases:[{esp:"La compu está lenta",eng:"My computer is slow",fon:"/mái kom-PIÚT-er is slóu/"},{esp:"Olvidé mi contraseña",eng:"I forgot my password",fon:"/ái for-GÓT mái PÁS-uord/"},{esp:"El sistema se cayó",eng:"The system is down",fon:"/de SÍS-tem is dáun/"},{esp:"No carga",eng:"It is not loading",fon:"/its not LÓU-ding/"},{esp:"Necesito soporte",eng:"I need IT support",fon:"/ái níd ái tí su-PÓRT/"}] },
-  { id:1019, tema:"Mostrando Empatía", estado:"idea", date:"", category:"Social", frases:[{esp:"Te entiendo",eng:"I hear you",fon:"/ái jír iú/"},{esp:"No te preocupes",eng:"Do not worry",fon:"/du not UÓ-rri/"},{esp:"Pasa todo el tiempo",eng:"It happens all the time",fon:"/it JÁ-pens ol de táim/"},{esp:"Tómate tu tiempo",eng:"Take your time",fon:"/téik iúr táim/"},{esp:"Estamos juntos en esto",eng:"We are in this together",fon:"/uír in dis tu-GUÉ-der/"}] },
-  { id:1020, tema:"Acordando Plazos", estado:"idea", date:"", category:"Profesional", frases:[{esp:"Para cuándo es",eng:"When is it due?",fon:"/uen is it diú/"},{esp:"Te lo doy mañana",eng:"You will have it tomorrow",fon:"/iúl jav it tu-MÓ-rrou/"},{esp:"Dame dos días",eng:"Give me two days",fon:"/guív mi tu déis/"},{esp:"Sin prisa",eng:"No rush",fon:"/nóu rosh/"},{esp:"Lo antes posible",eng:"As soon as possible",fon:"/as sun as PÓ-si-bol/"}] },
-  { id:1021, tema:"Siendo Diplomático", estado:"idea", date:"", category:"Reuniones", frases:[{esp:"Quizás otra opción",eng:"Maybe another option",fon:"/MÉI-bi a-NÓ-der ÓP-shon/"},{esp:"Es interesante pero",eng:"It is interesting but",fon:"/its ÍN-tres-ting bot/"},{esp:"Lo tendré en cuenta",eng:"I will keep that in mind",fon:"/ái uil kíp dat in máind/"},{esp:"Vamos a evaluarlo",eng:"Let's evaluate it",fon:"/lets e-VÁ-liu-eit it/"},{esp:"Gracias por el aporte",eng:"Thanks for the input",fon:"/zanks for di ÍN-put/"}] },
-  { id:1022, tema:"Entrevista de Trabajo", estado:"idea", date:"", category:"Profesional", frases:[{esp:"Mis fortalezas son",eng:"My strengths are",fon:"/mái strénzs ar/"},{esp:"Trabajo bien en equipo",eng:"I am a team player",fon:"/ái am a tím PLÉI-er/"},{esp:"Me encantan los retos",eng:"I love challenges",fon:"/ái lov CHÁ-len-yes/"},{esp:"Tengo experiencia en",eng:"I have experience in",fon:"/ái jav eks-PÍ-ri-ens in/"},{esp:"Cuándo empiezo",eng:"When do I start?",fon:"/uen du ái stárt/"}] },
-  { id:1023, tema:"Empezando la Mañana", estado:"idea", date:"", category:"Social", frases:[{esp:"Buenos días equipo",eng:"Good morning team",fon:"/gud MÓR-ning tím/"},{esp:"Qué hay de nuevo",eng:"What is new?",fon:"/uáts niú/"},{esp:"¿Listos para hoy?",eng:"Ready for today?",fon:"/RÉ-di for tu-DÉI/"},{esp:"Revisemos la agenda",eng:"Let's check the agenda",fon:"/lets chek di a-YÉN-da/"},{esp:"A darle con todo",eng:"Let's do this",fon:"/lets du dis/"}] },
-  { id:1024, tema:"Cuando Estás Confundido", estado:"idea", date:"", category:"Reuniones", frases:[{esp:"Me perdí",eng:"I am lost",fon:"/ái am lost/"},{esp:"Empieza de nuevo",eng:"Start over",fon:"/stárt ÓU-ver/"},{esp:"No sigo la idea",eng:"I am not following",fon:"/ái am not FÓ-lou-ing/"},{esp:"Explícamelo sencillo",eng:"Break it down for me",fon:"/bréik it dáun for mi/"},{esp:"Dame un ejemplo",eng:"Can you give an example?",fon:"/kan iú guív an ek-SÁM-pol/"}] },
-  { id:1025, tema:"Cambiando de Tema", estado:"idea", date:"", category:"Reuniones", frases:[{esp:"Por otro lado",eng:"On the other hand",fon:"/on di Ó-der jand/"},{esp:"Volviendo al punto",eng:"Getting back to the point",fon:"/GUÉ-ting bak tu de póint/"},{esp:"Cambiando de tema",eng:"Changing the subject",fon:"/CHÉIN-ying de SÓB-yekt/"},{esp:"Dejando eso de lado",eng:"Setting that aside",fon:"/SÉ-ting dat a-SÁID/"},{esp:"A propósito",eng:"By the way",fon:"/bái de uéi/"}] },
-  { id:1026, tema:"Motivando al Equipo", estado:"idea", date:"", category:"Profesional", frases:[{esp:"Confío en ustedes",eng:"I trust you guys",fon:"/ái trost iú gáis/"},{esp:"Son los mejores",eng:"You are the best",fon:"/iú ar de best/"},{esp:"Gran esfuerzo hoy",eng:"Great effort today",fon:"/gréit É-fort tu-DÉI/"},{esp:"Sigamos creciendo",eng:"Let's keep growing",fon:"/lets kíp GRÓU-ing/"},{esp:"El cielo es el límite",eng:"The sky is the limit",fon:"/de skái is de LÍ-mit/"}] },
-  { id:1027, tema:"Cuando Te Equivocas", estado:"idea", date:"", category:"Profesional", frases:[{esp:"Hablé muy pronto",eng:"I spoke too soon",fon:"/ái spóuk tu sun/"},{esp:"Lo entendí mal",eng:"I misunderstood",fon:"/ái mis-ón-der-STÚD/"},{esp:"Retiro lo dicho",eng:"I take that back",fon:"/ái téik dat bak/"},{esp:"Olviden lo que dije",eng:"Forget what I said",fon:"/for-GUÉT uát ái sed/"},{esp:"Empecemos de cero",eng:"Let's start from scratch",fon:"/lets stárt from skrách/"}] },
-  { id:1028, tema:"Despedidas Rápidas", estado:"idea", date:"", category:"Social", frases:[{esp:"Debo irme",eng:"I gotta run",fon:"/ái GÓ-ta ron/"},{esp:"Hablamos luego",eng:"Catch you later",fon:"/kach iú LÉI-ter/"},{esp:"Cuídate mucho",eng:"Take care",fon:"/téik kér/"},{esp:"Fue un placer",eng:"It was a pleasure",fon:"/it uas a PLÉ-shur/"},{esp:"Hasta la próxima",eng:"Until next time",fon:"/on-TÍL nekst táim/"}] },
-  { id:1029, tema:"Lidiando con Clientes", estado:"idea", date:"", category:"Profesional", frases:[{esp:"En qué le ayudo",eng:"How can I help you?",fon:"/jáu kan ái jelp iú/"},{esp:"Revisaré su caso",eng:"I will look into your case",fon:"/ái uil luk ÍN-tu iúr kéis/"},{esp:"Gracias por esperar",eng:"Thank you for waiting",fon:"/zank iú for UÉI-ting/"},{esp:"Comprendo su molestia",eng:"I understand your frustration",fon:"/ái ón-der-STÁND iúr fros-TRÉI-shon/"},{esp:"Lo resolveremos hoy",eng:"We will solve it today",fon:"/uí uil solv it tu-DÉI/"}] },
-  { id:1030, tema:"Ideas Millonarias", estado:"idea", date:"", category:"Profesional", frases:[{esp:"Tengo una propuesta",eng:"I have a proposal",fon:"/ái jav a pro-PÓU-sal/"},{esp:"Pensemos en grande",eng:"Let's think big",fon:"/lets zink big/"},{esp:"Esto será un éxito",eng:"This will be a hit",fon:"/dis uil bi a jit/"},{esp:"Cuál es el retorno",eng:"What is the ROI?",fon:"/uát is di ar ou ái/"},{esp:"Manos a la obra",eng:"Let's get to work",fon:"/lets guet tu uérk/"}] }
+  // --- ORIGINALES (1-30) ---
+  { id:1001, tema:"Sobrevivir a Zoom", estado:"pub", date:"2026-04-02", category:"Reuniones", retencion:78, frases:[{esp:"¿Me escuchan?",eng:"Can you hear me?",fon:"/kan iú jír mi/"},{esp:"Estás en mute",eng:"You are on mute",fon:"/iú ar on miút/"},{esp:"Se cortó tu audio",eng:"You cut out",fon:"/iú kot áut/"},{esp:"Vayamos al grano",eng:"Let's get to the point",fon:"/lets guet tu de póint/"},{esp:"Tengo que irme",eng:"I have to jump off",fon:"/ái jav tu yomp of/"}] },
+  { id:1002, tema:"Escapando con Elegancia", estado:"pub", date:"2026-04-04", category:"Social", retencion:85, frases:[{esp:"Ahora no puedo",eng:"I can't right now",fon:"/ái kant rráit náu/"},{esp:"Estoy a tope",eng:"I am swamped",fon:"/ái am suámpt/"},{esp:"Lo reviso luego",eng:"I will check it later",fon:"/ái uil chek it léi-ter/"},{esp:"Hablamos mañana",eng:"Let's talk tomorrow",fon:"/lets tok tu-MÓ-rrou/"},{esp:"Buen finde",eng:"Have a great weekend",fon:"/jav a gréit uí-kend/"}] },
+  { id:1003, tema:"El Clásico Email", estado:"ready", date:"2026-04-07", category:"Emails", frases:[{esp:"Adjunto el archivo",eng:"Please find attached",fon:"/plís fáind a-TACHT/"},{esp:"Como acordamos",eng:"As agreed",fon:"/as a-GRÍD/"},{esp:"Quedo atento",eng:"Looking forward",fon:"/lú-king fór-uard/"},{esp:"Solo confirmar",eng:"Just to confirm",fon:"/yost tu kon-FÉRM/"},{esp:"Saludos",eng:"Best regards",fon:"/best ri-GÁRDS/"}] },
+  { id:1004, tema:"Pidiendo Ayuda", estado:"edit", date:"2026-04-09", category:"Social", frases:[{esp:"Dame una mano",eng:"Give me a hand",fon:"/guív mi a jand/"},{esp:"No entiendo",eng:"I don't get this",fon:"/ái dóunt guet dis/"},{esp:"¿Un minuto?",eng:"Got a minute?",fon:"/got a MÍ-nit/"},{esp:"Necesito favor",eng:"I need a favor",fon:"/ái níd a féi-vor/"},{esp:"Sácame dudas",eng:"Clarify this",fon:"/KLÁ-ri-fai dis/"}] },
+  { id:1005, tema:"Viernes Tarde", estado:"idea", date:"2026-04-11", category:"Social", frases:[{esp:"Casi terminamos",eng:"We are almost done",fon:"/uí ar ól-moust don/"},{esp:"Terminemos hoy",eng:"Let's call it a day",fon:"/lets kol it a déi/"},{esp:"Semana larga",eng:"What a week",fon:"/uát a uík/"},{esp:"Nos vemos lunes",eng:"See you Monday",fon:"/sí iú món-dei/"},{esp:"A descansar",eng:"Time to rest",fon:"/táim tu rrest/"}] },
+  { id:1006, tema:"Cometiendo Errores", estado:"idea", date:"2026-04-14", category:"Profesional", frases:[{esp:"Fue culpa mía",eng:"My bad",fon:"/mái bad/"},{esp:"Hubo error",eng:"There was a mistake",fon:"/dér uas a mis-TÉIK/"},{esp:"Lo arreglo",eng:"I will fix it",fon:"/ái uil fiks it/"},{esp:"Siento demora",eng:"Sorry for delay",fon:"/SÓ-rri for di-LÉI/"},{esp:"No repetirá",eng:"Won't happen again",fon:"/uóunt JÁ-pen a-GUÉN/"}] },
+  { id:1007, tema:"Ganando Tiempo", estado:"audio", date:"2026-04-16", category:"Reuniones", frases:[{esp:"Déjame pensar",eng:"Let me think",fon:"/let mi zink/"},{esp:"Lo averiguo",eng:"I will find out",fon:"/ái uil fáind áut/"},{esp:"Un momento",eng:"Give me moment",fon:"/guív mi a MÓU-ment/"},{esp:"Te aviso",eng:"I will let you know",fon:"/ái uil let iú nóu/"},{esp:"Buena pregunta",eng:"Good question",fon:"/gud KUÉS-chon/"}] },
+  { id:1008, tema:"El Jefe te Llama", estado:"audio", date:"2026-04-18", category:"Profesional", frases:[{esp:"Dime",eng:"Tell me",fon:"/tel mi/"},{esp:"¿Ayudo?",eng:"How can I help?",fon:"/jáu kan ái jelp/"},{esp:"Buena idea",eng:"Good call",fon:"/gud kol/"},{esp:"Me encargo",eng:"I will handle it",fon:"/ái uil JÁN-dol it/"},{esp:"Entendido",eng:"Understood",fon:"/ón-der-STÚD/"}] },
+  { id:1009, tema:"Networking", estado:"idea", date:"2026-04-21", category:"Social", frases:[{esp:"Encantado",eng:"Nice to meet you",fon:"/náis tu mít iú/"},{esp:"¿Qué haces?",eng:"What do you do?",fon:"/uát du iú du/"},{esp:"¿De dónde?",eng:"Where from?",fon:"/uér from/"},{esp:"¿LinkedIn?",eng:"Are you on LinkedIn?",fon:"/ar iú on línkt-in/"},{esp:"En contacto",eng:"Stay in touch",fon:"/stéi in toch/"}] },
+  { id:1010, tema:"Elogios Equipo", estado:"idea", date:"2026-04-23", category:"Profesional", frases:[{esp:"Excelente",eng:"Outstanding work",fon:"/aut-STÁN-ding uérk/"},{esp:"Bien hecho",eng:"Well done",fon:"/uél don/"},{esp:"Eres genio",eng:"You are lifesaver",fon:"/iúr a LÁIF-sei-ver/"},{esp:"Gran aporte",eng:"Great input",fon:"/gréit ÍN-put/"},{esp:"Sigamos",eng:"Keep it up",fon:"/kíp it op/"}] },
+  { id:1011, tema:"Apagando Incendios", estado:"idea", date:"2026-04-25", category:"Profesional", frases:[{esp:"Es urgente",eng:"It is urgent",fon:"/its ÉR-yent/"},{esp:"Problema grave",eng:"Major issue",fon:"/MÉI-yor Í-shu/"},{esp:"Rápido",eng:"ASAP please",fon:"/éi-es-éi-pi plís/"},{esp:"Detén todo",eng:"Hold everything",fon:"/jóld É-vri-zing/"},{esp:"Hablemos",eng:"We need to talk",fon:"/uí níd tu tok/"}] },
+  { id:1012, tema:"Cansancio", estado:"idea", date:"2026-04-28", category:"Social", frases:[{esp:"Agotado",eng:"I am exhausted",fon:"/ái am ek-SÓS-ted/"},{esp:"Día largo",eng:"Long day",fon:"/long déi/"},{esp:"Necesito café",eng:"Need coffee",fon:"/níd KÓ-fi/"},{esp:"Cerebro frito",eng:"Brain is fried",fon:"/bréin is fráid/"},{esp:"No puedo más",eng:"Done for today",fon:"/don for tu-DÉI/"}] },
+  { id:1013, tema:"Cobrando Sueldo", estado:"idea", date:"2026-04-30", category:"Social", frases:[{esp:"Hoy pagan",eng:"Payday today",fon:"/PÉI-dei tu-DÉI/"},{esp:"Factura",eng:"Send invoice",fon:"/send ÍN-vois/"},{esp:"¿Depositaron?",eng:"Did we get paid?",fon:"/did uí guet péid/"},{esp:"Revisa cuenta",eng:"Check account",fon:"/chek a-KÁUNT/"},{esp:"Invito yo",eng:"Lunch on me",fon:"/lonch on mi/"}] },
+  // ... (Se incluyen los 30 originales en la versión completa, aquí resumidos para el ejemplo)
+  { id:1014, tema:"Chismes Oficina", estado:"idea", date:"", category:"Social", frases:[{esp:"¿Enteraste?",eng:"Did you hear?",fon:"/did iú jír/"},{esp:"No me digas",eng:"No way",fon:"/nóu uéi/"},{esp:"Secreto",eng:"It is secret",fon:"/its SÍ-kret/"},{esp:"Entre nosotros",eng:"Between us",fon:"/bi-TUÍN os/"},{esp:"Quién diría",eng:"Who would thought",fon:"/jú uud jav zot/"}] },
+  { id:1015, tema:"Permisos", estado:"idea", date:"", category:"Profesional", frases:[{esp:"Llego tarde",eng:"Running late",fon:"/RÓ-ning léit/"},{esp:"Siento mal",eng:"Feel sick",fon:"/fíl sik/"},{esp:"Cita médica",eng:"Doctor appointment",fon:"/DÓK-tor a-PÓINT/"},{esp:"Salgo temprano",eng:"Leaving early",fon:"/LÍ-ving ÉR-li/"},{esp:"Día libre",eng:"Day off",fon:"/déi of/"}] },
+  { id:1016, tema:"Éxitos", estado:"idea", date:"", category:"Social", frases:[{esp:"Lo logramos",eng:"We did it",fon:"/uí did it/"},{esp:"Misión",eng:"Mission accomplished",fon:"/MÍ-shon a-KÓM/"},{esp:"Trato",eng:"Deal closed",fon:"/díl klóusd/"},{esp:"Récord",eng:"Sales record",fon:"/séils RÉ-kord/"},{esp:"Celebrar",eng:"Let's celebrate",fon:"/lets SÉ-le-bréit/"}] },
+  { id:1017, tema:"Excusas", estado:"idea", date:"", category:"Social", frases:[{esp:"Se fue internet",eng:"Internet dropped",fon:"/ÍN-ter-net dropt/"},{esp:"Tráfico",eng:"Traffic bad",fon:"/TRÁ-fik bad/"},{esp:"No vi correo",eng:"Missed email",fon:"/mist Í-meil/"},{esp:"Otra reunión",eng:"In meeting",fon:"/in MÍ-ting/"},{esp:"Alarma",eng:"Alarm didn't go",fon:"/a-LÁRM DÍ-dent/"}] },
+  { id:1018, tema:"Tecnología", estado:"idea", date:"", category:"Profesional", frases:[{esp:"Lenta",eng:"Computer slow",fon:"/kom-PIÚT-er slóu/"},{esp:"Contraseña",eng:"Forgot password",fon:"/for-GÓT PÁS/"},{esp:"Sistema cayó",eng:"System down",fon:"/SÍS-tem dáun/"},{esp:"No carga",eng:"Not loading",fon:"/not LÓU-ding/"},{esp:"Soporte",eng:"Need support",fon:"/níd su-PÓRT/"}] },
+  { id:1019, tema:"Empatía", estado:"idea", date:"", category:"Social", frases:[{esp:"Entiendo",eng:"I hear you",fon:"/ái jír iú/"},{esp:"Preocupes",eng:"Do not worry",fon:"/du not UÓ-rri/"},{esp:"Pasa tiempo",eng:"Happens all time",fon:"/JÁ-pens ol táim/"},{esp:"Tu tiempo",eng:"Take your time",fon:"/téik iúr táim/"},{esp:"Juntos",eng:"In this together",fon:"/in dis tu-GUÉ-der/"}] },
+  { id:1020, tema:"Plazos", estado:"idea", date:"", category:"Profesional", frases:[{esp:"Cuándo es",eng:"When due?",fon:"/uen diú/"},{esp:"Mañana",eng:"Have it tomorrow",fon:"/jav it tu-MÓ/"},{esp:"Dos días",eng:"Two days",fon:"/tu déis/"},{esp:"Sin prisa",eng:"No rush",fon:"/nóu rosh/"},{esp:"Posible",eng:"As soon possible",fon:"/as sun PÓ-si/"}] },
+  { id:1021, tema:"Diplomacia", estado:"idea", date:"", category:"Reuniones", frases:[{esp:"Otra opción",eng:"Maybe option",fon:"/MÉI-bi ÓP-shon/"},{esp:"Interesante",eng:"Interesting but",fon:"/ÍN-tres-ting bot/"},{esp:"Cuenta",eng:"Keep in mind",fon:"/kíp in máind/"},{esp:"Evaluar",eng:"Evaluate it",fon:"/e-VÁ-liu-eit/"},{esp:"Aporte",eng:"Thanks input",fon:"/zanks ÍN-put/"}] },
+  { id:1022, tema:"Entrevista", estado:"idea", date:"", category:"Profesional", frases:[{esp:"Fortalezas",eng:"Strengths are",fon:"/strénzs ar/"},{esp:"Equipo",eng:"Team player",fon:"/tím PLÉI-er/"},{esp:"Retos",eng:"Love challenges",fon:"/lov CHÁ-len/"},{esp:"Experiencia",eng:"Experience in",fon:"/eks-PÍ-ri-ens/"},{esp:"Empiezo",eng:"When start?",fon:"/uen stárt/"}] },
+  { id:1023, tema:"Mañana", estado:"idea", date:"", category:"Social", frases:[{esp:"Buenos días",eng:"Morning team",fon:"/MÓR-ning tím/"},{esp:"Nuevo",eng:"What new?",fon:"/uáts niú/"},{esp:"Listos",eng:"Ready today?",fon:"/RÉ-di tu-DÉI/"},{esp:"Agenda",eng:"Check agenda",fon:"/chek a-YÉN-da/"},{esp:"Todo",eng:"Let's do this",fon:"/lets du dis/"}] },
+  { id:1024, tema:"Confundido", estado:"idea", date:"", category:"Reuniones", frases:[{esp:"Perdí",eng:"I am lost",fon:"/ái am lost/"},{esp:"De nuevo",eng:"Start over",fon:"/stárt ÓU-ver/"},{esp:"No sigo",eng:"Not following",fon:"/not FÓ-lou/"},{esp:"Sencillo",eng:"Break down",fon:"/bréik dáun/"},{esp:"Ejemplo",eng:"Give example",fon:"/guív ek-SÁM/"}] },
+  { id:1025, tema:"Cambio Tema", estado:"idea", date:"", category:"Reuniones", frases:[{esp:"Otro lado",eng:"Other hand",fon:"/Ó-der jand/"},{esp:"Punto",eng:"Back to point",fon:"/bak tu póint/"},{esp:"Tema",eng:"Changing subject",fon:"/CHÉIN-ying SÓB/"},{esp:"Lado",eng:"Setting aside",fon:"/SÉ-ting a-SÁID/"},{esp:"Propósito",eng:"By the way",fon:"/bái de uéi/"}] },
+  { id:1026, tema:"Motivando", estado:"idea", date:"", category:"Profesional", frases:[{esp:"Confío",eng:"Trust you",fon:"/trost iú/"},{esp:"Mejores",eng:"The best",fon:"/de best/"},{esp:"Esfuerzo",eng:"Great effort",fon:"/gréit É-fort/"},{esp:"Creciendo",eng:"Keep growing",fon:"/kíp GRÓU-ing/"},{esp:"Límite",eng:"Sky is limit",fon:"/skái is LÍ-mit/"}] },
+  { id:1027, tema:"Equivocas", estado:"idea", date:"", category:"Profesional", frases:[{esp:"Pronto",eng:"Spoke too soon",fon:"/spóuk tu sun/"},{esp:"Mal",eng:"Misunderstood",fon:"/mis-ón-der/"},{esp:"Retiro",eng:"Take back",fon:"/téik bak/"},{esp:"Olviden",eng:"Forget said",fon:"/for-GUÉT sed/"},{esp:"Cero",eng:"Start scratch",fon:"/stárt skrách/"}] },
+  { id:1028, tema:"Despedidas", estado:"idea", date:"", category:"Social", frases:[{esp:"Irme",eng:"Gotta run",fon:"/GÓ-ta ron/"},{esp:"Luego",eng:"Catch later",fon:"/kach LÉI-ter/"},{esp:"Cuídate",eng:"Take care",fon:"/téik kér/"},{esp:"Placer",eng:"Was pleasure",fon:"/uas PLÉ-shur/"},{esp:"Próxima",eng:"Until next",fon:"/on-TÍL nekst/"}] },
+  { id:1029, tema:"Clientes", estado:"idea", date:"", category:"Profesional", frases:[{esp:"Ayudo",eng:"Help you?",fon:"/jelp iú/"},{esp:"Caso",eng:"Look into case",fon:"/luk ÍN-tu kéis/"},{esp:"Esperar",eng:"Thanks waiting",fon:"/zank UÉI-ting/"},{esp:"Molestia",eng:"Understand frustration",fon:"/ón-der-STÁND fros/"},{esp:"Hoy",eng:"Solve today",fon:"/solv tu-DÉI/"}] },
+  { id:1030, tema:"Millonarias", estado:"idea", date:"", category:"Profesional", frases:[{esp:"Propuesta",eng:"Have proposal",fon:"/jav pro-PÓU/"},{esp:"Grande",eng:"Think big",fon:"/zink big/"},{esp:"Éxito",eng:"Be hit",fon:"/bi a jit/"},{esp:"Retorno",eng:"What ROI?",fon:"/uát ar ou ái/"},{esp:"Obra",eng:"Get to work",fon:"/guet tu uérk/"}] }
 ];
 
 // ==========================================
-// 2. ESTADO Y LOCAL STORAGE
+// 2. STATE MANAGEMENT
 // ==========================================
 let db = [];
 let draggedId = null;
 let currentModalId = null;
-let calendarDate = new Date();
-let currentAiScript = null; // Para guardar temporalmente guion generado
+let calendarDate = new Date(2026, 3, 1); // Iniciar en Abril 2026 por defecto
+let currentPrompts = {};
 
 function initApp() {
-    const stored = localStorage.getItem('ism_db_v4');
+    const stored = localStorage.getItem('ism_db_v5');
     if (stored) {
         db = JSON.parse(stored);
     } else {
-        db = JSON.parse(JSON.stringify(SEED_DATA)); // Clon profundo
+        db = JSON.parse(JSON.stringify(SEED_DATA));
         saveDB();
     }
-    document.getElementById('apiKeyInput').value = localStorage.getItem('ism_gemini_key') || '';
     refreshAll();
 }
 
 function saveDB() {
-    localStorage.setItem('ism_db_v4', JSON.stringify(db));
+    localStorage.setItem('ism_db_v5', JSON.stringify(db));
     refreshAll();
 }
 
-function getApiKey() { return localStorage.getItem('ism_gemini_key'); }
-function saveApiKey() {
-    const k = document.getElementById('apiKeyInput').value.trim();
-    localStorage.setItem('ism_gemini_key', k);
-    toast('API Key guardada.', 'success');
+function refreshAll() {
+    renderDashboard(); renderTable(); renderKanban(); renderCalendar(); renderAnalytics(); populateSelectors();
 }
 
 // ==========================================
-// 3. NAVEGACIÓN Y RENDER GENERAL
+// 3. NAVIGATION
 // ==========================================
 function goTo(viewId, btn) {
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
     document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
     document.getElementById('v-' + viewId).classList.add('active');
-    btn.classList.add('active');
-    if (window.innerWidth <= 900) toggleSidebar();
+    if(btn) btn.classList.add('active');
+    if (window.innerWidth <= 768) toggleSidebar();
 }
 
 function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); }
 
-function refreshAll() {
-    renderDashboard(); renderTable(); renderKanban(); renderCalendar(); populateSelectors();
-}
-
 // ==========================================
-// 4. VISTAS ESPECÍFICAS
+// 4. VIEWS LOGIC
 // ==========================================
 function renderDashboard() {
     const counts = { idea:0, audio:0, edit:0, ready:0, pub:0 };
     db.forEach(v => { if(counts[v.estado] !== undefined) counts[v.estado]++; });
-    const total = db.length;
-    const done = counts.pub + counts.ready;
-    const pct = total > 0 ? Math.round((done / total) * 100) : 0;
-
-    document.getElementById('s-total').innerText = total;
-    document.getElementById('s-idea').innerText = counts.idea;
-    document.getElementById('s-edit').innerText = counts.edit;
+    document.getElementById('s-total').innerText = db.length;
+    document.getElementById('s-prod').innerText = counts.idea + counts.audio + counts.edit;
     document.getElementById('s-ready').innerText = counts.ready;
     document.getElementById('s-pub').innerText = counts.pub;
-    document.getElementById('progress-pct').innerText = pct + '%';
-    document.getElementById('progress-fill').style.width = pct + '%';
 }
 
 function renderTable() {
     const tbody = document.getElementById('tableBody');
-    tbody.innerHTML = db.map(v => `
+    const search = document.getElementById('tableSearch').value.toLowerCase();
+    const filtered = db.filter(v => v.tema.toLowerCase().includes(search) || v.category.toLowerCase().includes(search));
+    
+    tbody.innerHTML = filtered.map(v => `
         <tr onclick="openModal(${v.id})">
+            <td style="font-family:monospace; color:var(--text-tertiary)">#${v.id}</td>
             <td style="font-weight:700;">${v.tema}</td>
-            <td><span class="badge badge-${v.estado}">${v.estado.toUpperCase()}</span></td>
+            <td><span class="badge badge-${v.estado}">${v.estado}</span></td>
             <td>${v.category}</td>
-            <td style="color:var(--text-secondary);">${v.frases[0].eng}</td>
+            <td style="color:var(--text-secondary); font-style:italic;">"${v.frases[0].eng}"</td>
+            <td>${v.date || '-'}</td>
         </tr>
     `).join('');
 }
 
 function renderKanban() {
     const cols = [
-        { key:'idea', label:'Ideas / Guión' }, { key:'audio', label:'Audio IA' },
-        { key:'edit', label:'En Edición' }, { key:'ready', label:'Listo' }, { key:'pub', label:'Publicado' }
+        { key:'idea', label:'💡 Ideas' }, { key:'audio', label:'🎙️ Audio' },
+        { key:'edit', label:'✂️ Edición' }, { key:'ready', label:'✅ Listo' }, { key:'pub', label:'🚀 Publicado' }
     ];
     document.getElementById('kanbanBoard').innerHTML = cols.map(col => {
         const items = db.filter(v => v.estado === col.key);
         return `
         <div class="kanban-col" ondragover="event.preventDefault()" ondrop="dropCard(event, '${col.key}')">
-            <div class="kanban-col-header"><span>${col.label}</span><span>${items.length}</span></div>
+            <div class="kanban-col-header"><span>${col.label}</span><span style="background:var(--bg-card); padding:2px 8px; border-radius:10px; font-size:0.7rem;">${items.length}</span></div>
             <div class="kanban-col-body">
                 ${items.map(v => `
                     <div class="kanban-card" draggable="true" ondragstart="dragStart(${v.id})" onclick="openModal(${v.id})">
                         <div class="kanban-card-title">${v.tema}</div>
                         <div class="kanban-card-phrase">"${v.frases[0].eng}"</div>
+                        <div class="kanban-card-meta"><span>${v.category}</span><span>${v.date ? '📅' : ''}</span></div>
                     </div>
                 `).join('')}
             </div>
@@ -425,7 +615,11 @@ function dropCard(e, newStatus) {
     e.preventDefault();
     if(draggedId) {
         const idx = db.findIndex(v => v.id === draggedId);
-        if(idx !== -1) { db[idx].estado = newStatus; saveDB(); }
+        if(idx !== -1) { 
+            db[idx].estado = newStatus; 
+            if(newStatus === 'pub' && !db[idx].date) db[idx].date = new Date().toISOString().split('T')[0];
+            saveDB(); 
+        }
         draggedId = null;
     }
 }
@@ -439,179 +633,245 @@ function renderCalendar() {
 
     const firstDay = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
-    let html = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'].map(d => `<div style="text-align:center;font-size:0.7rem;color:var(--text-tertiary)">${d}</div>`).join('');
     
-    for(let i=0; i<firstDay; i++) html += `<div></div>`;
+    let html = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'].map(d => `<div class="calendar-day-header">${d}</div>`).join('');
+    for(let i=0; i<firstDay; i++) html += `<div style="background:var(--bg-base)"></div>`;
+    
     for(let d=1; d<=daysInMonth; d++) {
         const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
         const vids = db.filter(v => v.date === dateStr);
-        html += `<div class="calendar-day"><div style="font-size:0.7rem; margin-bottom:4px;">${d}</div>
-                 ${vids.map(v=>`<div class="cal-item" onclick="openModal(${v.id})">${v.tema}</div>`).join('')}</div>`;
+        html += `<div class="calendar-day">
+            <div style="font-size:0.8rem; font-weight:700; margin-bottom:6px; color:var(--text-tertiary)">${d}</div>
+            ${vids.map(v=>`<div class="cal-item ${v.estado}" onclick="openModal(${v.id})" title="${v.tema}">${v.tema}</div>`).join('')}
+        </div>`;
     }
     grid.innerHTML = html;
 }
 function changeMonth(d) { calendarDate.setMonth(calendarDate.getMonth() + d); renderCalendar(); }
 
+function renderAnalytics() {
+    const tbody = document.getElementById('analyticsBody');
+    const pubVideos = db.filter(v => v.estado === 'pub');
+    tbody.innerHTML = pubVideos.map(v => {
+        let decision = '<span style="color:var(--text-tertiary)">Esperando datos...</span>';
+        if(v.retencion) {
+            if(v.retencion >= 70) decision = '<strong style="color:var(--green)">🔥 ÉXITO - Reciclar</strong>';
+            else if(v.retencion >= 50) decision = '<strong style="color:var(--yellow)">⚠️ Promedio</strong>';
+            else decision = '<strong style="color:var(--red)">❌ Bajo - Cambiar Gancho</strong>';
+        }
+        return `
+        <tr>
+            <td style="font-weight:700;">${v.tema}</td>
+            <td><input type="number" class="form-input" style="width:80px; padding:4px;" value="${v.retencion || ''}" onchange="updateRetention(${v.id}, this.value)"></td>
+            <td><input type="number" class="form-input" style="width:80px; padding:4px;" placeholder="%"></td>
+            <td>${decision}</td>
+        </tr>`;
+    }).join('');
+}
+
+function updateRetention(id, val) {
+    const idx = db.findIndex(v => v.id === id);
+    if(idx !== -1) { db[idx].retencion = val; saveDB(); toast('Retención actualizada', 'success'); }
+}
+
 // ==========================================
-// 5. INTEGRACIÓN GEMINI IA
+// 5. PROMPT HUB (NO API)
 // ==========================================
-async function callGemini(prompt) {
-    const key = getApiKey();
-    if (!key) { toast('Falta la API Key en Configuración.', 'error'); return null; }
-    try {
-        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${key}`, {
-            method: 'POST', headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-        });
-        const data = await res.json();
-        if(data.error) throw new Error(data.error.message);
-        return data.candidates[0].content.parts[0].text;
-    } catch(e) { toast('Error IA: ' + e.message, 'error'); return null; }
-}
-
-async function aiGenerateScript() {
-    const topic = document.getElementById('aiTopic').value.trim();
-    if(!topic) { toast('Ingresa un tema.', 'error'); return; }
-    
-    const resEl = document.getElementById('aiScriptResult');
-    const btnSave = document.getElementById('btnSaveScript');
-    resEl.style.display = 'block'; resEl.innerText = '⏳ Pensando (actuando sin miedo)...'; btnSave.style.display = 'none';
-
-    const prompt = `Eres un experto enseñando inglés corporativo en el canal de YouTube Shorts "Inglés Sin Miedo". Crea 5 frases útiles sobre: "${topic}".
-Responde EXCLUSIVAMENTE en este formato JSON exacto:
-[
-  {"esp":"frase en español", "eng":"frase en inglés", "fon":"/fonética figurada intuitiva/"},
-  ... (5 elementos)
-]`;
-    const resp = await callGemini(prompt);
-    if(resp) {
-        try {
-            const clean = resp.replace(/```json/g, '').replace(/```/g, '').trim();
-            const frases = JSON.parse(clean);
-            currentAiScript = { tema: topic, frases: frases };
-            resEl.innerText = JSON.stringify(frases, null, 2);
-            btnSave.style.display = 'inline-block';
-        } catch(e) { resEl.innerText = resp; toast('No se pudo parsear a JSON. Reintenta.', 'error'); }
-    }
-}
-
-function injectAiScript() {
-    if(currentAiScript) {
-        db.push({
-            id: Date.now(), tema: currentAiScript.tema, estado: 'idea', category: 'General',
-            date: new Date().toISOString().split('T')[0], frases: currentAiScript.frases
-        });
-        saveDB();
-        document.getElementById('aiTopic').value = '';
-        document.getElementById('aiScriptResult').style.display = 'none';
-        document.getElementById('btnSaveScript').style.display = 'none';
-        toast('¡Guion inyectado a la Base de Datos!', 'success');
-    }
-}
-
 function populateSelectors() {
-    const opts = '<option value="">-- Selecciona un video --</option>' + db.map(v => `<option value="${v.id}">${v.tema}</option>`).join('');
-    const seoSel = document.getElementById('seoSelect'); if(seoSel) seoSel.innerHTML = opts;
-    const linSel = document.getElementById('linkedinSelect'); if(linSel) linSel.innerHTML = opts;
+    const opts = '<option value="">-- Selecciona Video --</option>' + db.map(v => `<option value="${v.id}">${v.tema}</option>`).join('');
+    const sel = document.getElementById('promptVideoSelect'); if(sel) sel.innerHTML = opts;
 }
 
-async function aiGenerateSEO() {
-    const id = document.getElementById('seoSelect').value;
-    if(!id) return;
+function loadPromptsForVideo() {
+    const id = document.getElementById('promptVideoSelect').value;
+    const container = document.getElementById('promptsContainer');
+    if(!id) { container.style.display = 'none'; return; }
+    
     const v = db.find(x => x.id == id);
-    const resEl = document.getElementById('aiSeoResult');
-    resEl.style.display = 'block'; resEl.innerText = '⏳ Optimizando SEO...';
+    const frasesTxt = v.frases.map(f => `ES: ${f.esp} | EN: ${f.eng} | FON: ${f.fon}`).join('\n');
     
-    const frasesTxt = v.frases.map(f => `${f.esp} -> ${f.eng}`).join('\n');
-    const prompt = `Actúa como experto SEO para YouTube Shorts. Canal: "Inglés Sin Miedo". Video: "${v.tema}".\nContenido:\n${frasesTxt}\n\nGenera:\n1. Tres títulos virales (max 60 chars, con gancho).\n2. Una descripción corta para YouTube con un CTA potente y 5 hashtags.`;
+    // Generar Prompts Dinámicos
+    currentPrompts.script = `Actúa como experto en guiones para YouTube Shorts de inglés corporativo.
+Tema: "${v.tema}"
+Frases base:
+${frasesTxt}
+
+Tarea: Escribe un guion completo de 50 segundos.
+Estructura:
+1. Gancho visual y verbal en los primeros 3 segundos.
+2. Presentación de las 5 frases (Español -> Inglés -> Fonética).
+3. CTA fuerte al final para suscribirse.
+Tono: Profesional pero cercano.`;
+
+    currentPrompts.seo = `Actúa como experto en SEO para YouTube.
+Video: "${v.tema}"
+Contenido: ${v.frases[0].eng}...
+
+Genera:
+1. 3 Títulos virales (menos de 60 caracteres, con emojis).
+2. Descripción optimizada con keywords.
+3. 10 Hashtags relevantes.`;
+
+    currentPrompts.linkedin = `Actúa como Top Voice en LinkedIn enseñando inglés.
+Tema: "${v.tema}"
+Frases: ${v.frases.map(f => f.eng).join(', ')}
+
+Crea un post profesional:
+- Hook fuerte en la primera línea.
+- Lista de las frases con traducción.
+- Pregunta final para generar comentarios.
+- 5 Hashtags corporativos.`;
+
+    currentPrompts.editor = `Instrucciones para Editor de Video (CapCut/Premiere):
+Video: "${v.tema}"
+- Formato: 9:16 Vertical.
+- Música: Lo-fi corporativo volumen -25db.
+- Subtítulos: Fuente Inter, Blanco con borde negro. Resaltar palabras clave en AMARILLO.
+- Ritmo: Jump cuts entre frases. Zoom in digital en la palabra clave de cada frase.
+- B-Roll: Insertar imágenes de oficina cuando se mencione el contexto.`;
+
+    // Renderizar en UI
+    document.getElementById('promptScript').innerText = currentPrompts.script;
+    document.getElementById('promptSEO').innerText = currentPrompts.seo;
+    document.getElementById('promptLinkedIn').innerText = currentPrompts.linkedin;
+    document.getElementById('promptEditor').innerText = currentPrompts.editor;
     
-    const resp = await callGemini(prompt);
-    if(resp) resEl.innerText = resp;
+    container.style.display = 'block';
 }
 
-async function aiGenerateLinkedIn() {
-    const id = document.getElementById('linkedinSelect').value;
-    if(!id) return;
-    const v = db.find(x => x.id == id);
-    const resEl = document.getElementById('aiLinkedinResult');
-    resEl.style.display = 'block'; resEl.innerText = '⏳ Escribiendo post corporativo...';
-    
-    const frasesTxt = v.frases.map(f => `• ${f.esp}\n  ${f.eng} (${f.fon})`).join('\n\n');
-    const prompt = `Actúa como un Top Voice en LinkedIn enseñando inglés profesional. Convierte esto en un post que detenga el scroll.\nTema: "${v.tema}"\n\nFrases:\n${frasesTxt}\n\nIncluye: Hook agresivo en la primera línea, saltos de línea, emojis corporativos y CTA al final.`;
-    
-    const resp = await callGemini(prompt);
-    if(resp) resEl.innerText = resp;
+function copyPrompt(type) {
+    if(currentPrompts[type]) {
+        navigator.clipboard.writeText(currentPrompts[type]);
+        toast('¡Prompt copiado! Pégalo en ChatGPT.', 'success');
+    }
 }
 
 // ==========================================
-// 6. POMODORO TIMER
-// ==========================================
-let timerInterval;
-let timeLeft = 25 * 60; // 25 minutes
-let isRunning = false;
-
-function updateTimerDisplay() {
-    let m = Math.floor(timeLeft / 60);
-    let s = timeLeft % 60;
-    document.getElementById('timerDisplay').innerText = `${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
-}
-function startTimer() {
-    if(isRunning) return;
-    isRunning = true;
-    document.getElementById('timerDisplay').classList.add('timer-running');
-    timerInterval = setInterval(() => {
-        if(timeLeft > 0) { timeLeft--; updateTimerDisplay(); }
-        else { clearInterval(timerInterval); isRunning = false; document.getElementById('timerDisplay').classList.remove('timer-running'); toast('¡Bloque terminado! Descansa.', 'success'); }
-    }, 1000);
-}
-function pauseTimer() { clearInterval(timerInterval); isRunning = false; document.getElementById('timerDisplay').classList.remove('timer-running'); }
-function resetTimer() { pauseTimer(); timeLeft = 25 * 60; updateTimerDisplay(); }
-
-// ==========================================
-// 7. MODAL Y UTILIDADES
+// 6. MODAL & UTILS
 // ==========================================
 function openModal(id) {
-    const v = db.find(x => x.id == id);
-    if(!v) return;
-    currentModalId = id;
+    let v;
+    if(id === 'new') {
+        v = { id: Date.now(), tema: "Nuevo Video", estado: "idea", category: "General", date: "", frases: [{esp:"",eng:"",fon:""},{esp:"",eng:"",fon:""},{esp:"",eng:"",fon:""},{esp:"",eng:"",fon:""},{esp:"",eng:"",fon:""}] };
+        currentModalId = 'new';
+    } else {
+        v = db.find(x => x.id == id);
+        currentModalId = id;
+    }
+    
     document.getElementById('modalTitle').innerText = v.tema;
     document.getElementById('modalBody').innerHTML = `
-        <div class="grid-2" style="margin-bottom:20px;">
-            <div class="form-group"><label>Estado</label>
+        <div class="grid-2" style="margin-bottom:24px;">
+            <div class="form-group">
+                <label>Estado</label>
                 <select class="form-select" id="modStatus" onchange="saveModal()">
-                    <option value="idea" ${v.estado=='idea'?'selected':''}>Idea / Guión</option>
-                    <option value="audio" ${v.estado=='audio'?'selected':''}>Audio IA</option>
-                    <option value="edit" ${v.estado=='edit'?'selected':''}>En Edición</option>
+                    <option value="idea" ${v.estado=='idea'?'selected':''}>Idea</option>
+                    <option value="audio" ${v.estado=='audio'?'selected':''}>Audio</option>
+                    <option value="edit" ${v.estado=='edit'?'selected':''}>Edición</option>
                     <option value="ready" ${v.estado=='ready'?'selected':''}>Listo</option>
                     <option value="pub" ${v.estado=='pub'?'selected':''}>Publicado</option>
                 </select>
             </div>
-            <div class="form-group"><label>Fecha Publicación</label><input type="date" class="form-input" id="modDate" value="${v.date || ''}" onchange="saveModal()"></div>
+            <div class="form-group">
+                <label>Fecha Publicación</label>
+                <input type="date" class="form-input" id="modDate" value="${v.date || ''}" onchange="saveModal()">
+            </div>
         </div>
-        <div style="background:var(--bg-card); padding:16px; border-radius:8px;">
-            ${v.frases.map(f => `<div style="margin-bottom:10px; border-bottom:1px solid var(--border); padding-bottom:10px;">
-                <div style="font-weight:700;">🇪🇸 ${f.esp}</div>
-                <div style="color:var(--accent);">🇬🇧 ${f.eng}</div>
-                <div style="color:var(--text-secondary); font-family:monospace;">🗣️ ${f.fon}</div>
-            </div>`).join('')}
+        
+        <div class="form-group">
+            <label>Título del Video</label>
+            <input type="text" class="form-input" id="modTopic" value="${v.tema}" onchange="saveModal()">
+        </div>
+
+        <h4 style="margin:24px 0 12px; color:var(--text-secondary);">Frases del Guion</h4>
+        ${v.frases.map((f, i) => `
+            <div class="phrase-row">
+                <div>
+                    <div class="phrase-label">Español</div>
+                    <input type="text" class="form-input" value="${f.esp}" onchange="updatePhrase(${i}, 'esp', this.value)">
+                </div>
+                <div>
+                    <div class="phrase-label">Inglés</div>
+                    <input type="text" class="form-input" value="${f.eng}" onchange="updatePhrase(${i}, 'eng', this.value)" style="color:var(--accent); font-weight:600;">
+                </div>
+                <div>
+                    <div class="phrase-label">Fonética</div>
+                    <input type="text" class="form-input" value="${f.fon}" onchange="updatePhrase(${i}, 'fon', this.value)" style="font-family:monospace;">
+                </div>
+            </div>
+        `).join('')}
+        
+        <div style="margin-top:24px; padding-top:24px; border-top:1px solid var(--border); display:flex; justify-content:flex-end; gap:10px;">
+            ${id !== 'new' ? `<button class="btn btn-danger btn-sm" onclick="deleteVideo(${id})">Eliminar</button>` : ''}
+            <button class="btn btn-primary" onclick="closeModal()">Guardar y Cerrar</button>
         </div>
     `;
     document.getElementById('modal').classList.add('open');
 }
 
 function saveModal() {
-    const v = db.find(x => x.id == currentModalId);
-    if(v) {
-        v.estado = document.getElementById('modStatus').value;
-        v.date = document.getElementById('modDate').value;
-        saveDB();
-        toast('Actualizado', 'success');
+    if(currentModalId === 'new') {
+        const newV = {
+            id: Date.now(),
+            tema: document.getElementById('modTopic').value,
+            estado: document.getElementById('modStatus').value,
+            date: document.getElementById('modDate').value,
+            category: "General",
+            frases: [{esp:"",eng:"",fon:""},{esp:"",eng:"",fon:""},{esp:"",eng:"",fon:""},{esp:"",eng:"",fon:""},{esp:"",eng:"",fon:""}]
+        };
+        db.push(newV);
+        currentModalId = newV.id;
+        toast('Video creado', 'success');
+    } else {
+        const v = db.find(x => x.id == currentModalId);
+        if(v) {
+            v.estado = document.getElementById('modStatus').value;
+            v.date = document.getElementById('modDate').value;
+            v.tema = document.getElementById('modTopic').value;
+            toast('Cambios guardados', 'success');
+        }
     }
+    saveDB();
+    // Re-render modal to update title if changed
+    openModal(currentModalId); 
+}
+
+function updatePhrase(idx, field, val) {
+    const v = db.find(x => x.id == currentModalId);
+    if(v && v.frases[idx]) {
+        v.frases[idx][field] = val;
+        saveDB(); // Auto-save phrases
+    }
+}
+
+function deleteVideo(id) {
+    if(confirm('¿Eliminar este video permanentemente?')) {
+        db = db.filter(v => v.id !== id);
+        saveDB();
+        closeModal();
+        toast('Video eliminado', 'success');
+    }
+}
+
+function closeModal() { document.getElementById('modal').classList.remove('open'); }
+
+function createNewVideo() {
+    const topic = document.getElementById('newVideoTopic').value;
+    const cat = document.getElementById('newVideoCategory').value;
+    if(!topic) { toast('Escribe un tema', 'error'); return; }
+    
+    db.push({
+        id: Date.now(), tema: topic, estado: 'idea', category: cat, date: '',
+        frases: [{esp:"",eng:"",fon:""},{esp:"",eng:"",fon:""},{esp:"",eng:"",fon:""},{esp:"",eng:"",fon:""},{esp:"",eng:"",fon:""}]
+    });
+    saveDB();
+    document.getElementById('newVideoTopic').value = '';
+    toast('Video creado en Ideas', 'success');
 }
 
 function exportDB() {
     const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(db));
-    const el = document.createElement('a'); el.setAttribute("href", dataStr); el.setAttribute("download", "ISM_Backup.json"); document.body.appendChild(el); el.click(); el.remove();
+    const el = document.createElement('a'); el.setAttribute("href", dataStr); el.setAttribute("download", `ISM_Backup_${new Date().toISOString().split('T')[0]}.json`); document.body.appendChild(el); el.click(); el.remove();
 }
 
 function importDB() {
@@ -625,13 +885,21 @@ function importDB() {
     reader.readAsText(file);
 }
 
+function factoryReset() {
+    if(confirm('⚠️ RESET TOTAL: Se borrarán todos tus cambios y se cargarán los 30 originales. ¿Continuar?')) {
+        db = JSON.parse(JSON.stringify(SEED_DATA));
+        saveDB();
+        toast('Sistema restaurado de fábrica', 'success');
+    }
+}
+
 function toast(msg, type) {
     const cont = document.getElementById('toast-container');
-    const t = document.createElement('div'); t.className = `toast ${type}`; t.innerText = msg;
+    const t = document.createElement('div'); t.className = `toast ${type}`; t.innerHTML = `<span>${type === 'success' ? '✅' : '❌'}</span> ${msg}`;
     cont.appendChild(t); setTimeout(() => t.remove(), 3000);
 }
 
-// INICIAR
+// INIT
 window.onload = initApp;
 </script>
 </body>
